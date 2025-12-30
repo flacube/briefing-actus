@@ -114,10 +114,10 @@ Dernière mise à jour : {generated_at}
 
     html += "</body></html>"
 
-    output_path = Path("output/index.html")
+    output_path = Path("index.html")
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    print("📄 Écriture de output/index.html")
+    print("📄 Écriture de index.html")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html)
     print("✅ Fichier écrit")
