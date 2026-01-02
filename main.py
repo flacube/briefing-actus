@@ -12,7 +12,7 @@ STOP_WORDS = {
     "le", "la", "les", "de", "des", "du", "un", "une", "et", "en", "à",
     "pour", "dans", "sur", "au", "aux", "par", "avec", "ce", "ces",
     "est", "sont", "plus", "moins", "que", "qui", "dont", "entre",
-    "direct", "images", "année", "nouvelle", "leurs", "être"
+    "direct", "images", "année", "nouvelle", "leurs", "être", "après", "dune"
 }
 
 
