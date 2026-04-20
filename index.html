@@ -1,18 +1,396 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Briefing Actus</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News & Actus</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e8eaf0; min-height: 100vh; transition: background 0.3s, color 0.3s; }
+    body.light { background: #f0f2f7; color: #1a1d2e; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; background: #1a1d2e; border-bottom: 1px solid #2a2d3e; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 10px; }
+    body.light header { background: #ffffff; border-color: #dde2ee; }
+    .logo { font-size: 1.2rem; font-weight: 700; color: #3d8ef8; }
+    .header-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    #lastUpdate { font-size: 0.78rem; color: #8892a4; }
+    #toggleMode { background: #22263a; color: #e8eaf0; border: 1px solid #2a2d3e; padding: 7px 14px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; transition: all 0.2s; }
+    body.light #toggleMode { background: #e8eaf0; color: #1a1d2e; border-color: #dde2ee; }
+    #toggleMode:hover { background: #3d8ef8; color: #fff; }
+    main { max-width: 1400px; margin: 0 auto; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px; }
+    .card { background: #1a1d2e; border: 1px solid #2a2d3e; border-radius: 14px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    body.light .card { background: #ffffff; border-color: #dde2ee; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .card h2 { font-size: 1rem; font-weight: 600; color: #8892a4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #2a2d3e; }
+    body.light .card h2 { border-color: #dde2ee; }
+    .resume-ia { font-size: 0.95rem; line-height: 1.7; color: #e8eaf0; }
+    body.light .resume-ia { color: #1a1d2e; }
+    .ia-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .news-list { display: flex; flex-direction: column; }
+    .news-item { padding: 12px 0; border-bottom: 1px solid #2a2d3e; display: flex; flex-direction: column; gap: 5px; }
+    body.light .news-item { border-color: #dde2ee; }
+    .news-item:first-child { padding-top: 0; }
+    .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .news-titre { font-size: 0.88rem; color: #e8eaf0; line-height: 1.45; font-weight: 600; text-decoration: none; display: block; }
+    body.light .news-titre { color: #1a1d2e; }
+    .news-titre:hover { color: #3d8ef8; }
+    .news-resume { font-size: 0.80rem; color: #8892a4; line-height: 1.4; }
+    body.light .news-resume { color: #5a6478; }
+    .news-date { font-size: 0.70rem; color: #5a6478; }
+    .btn-more { margin-top: 12px; background: none; border: 1px solid #2a2d3e; color: #3d8ef8; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; width: 100%; transition: all 0.2s; }
+    body.light .btn-more { border-color: #dde2ee; }
+    .btn-more:hover { background: #3d8ef8; color: #fff; }
+    @media (max-width: 900px) { .news-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
-<body>
-
-<h1>🗞️ Briefing Actus</h1>
-
-<p style="color: gray; font-size: 0.9em;">
-Dernière mise à jour : 20/04/2026 07:49:51 UTC
-</p>
-
-<h2>🧠 Analyse & contexte</h2>
-<p>L’actualité des dernières 24 heures est marquée par plusieurs thèmes forts, notamment : guerre, monde, contre, tout, lundi, justice. Ces sujets reflètent à la fois les tensions internationales, les débats politiques et les dynamiques culturelles du moment.</p>
-<h2>Le Monde</h2><p><a href="https://www.lemonde.fr/international/live/2026/04/20/en-direct-guerre-au-moyen-orient-j-d-vance-attendu-au-pakistan-pour-de-nouvelles-negociations-l-iran-ne-compte-pas-discuter-a-nouveau-avec-les-etats-unis_6679867_3210.html">EN DIRECT, guerre au Moyen-Orient : J. D. Vance attendu au Pakistan pour de nouvelles négociations ; l’Iran ne compte pas discuter à nouveau avec les Etats-Unis</a></p><p><a href="https://www.lemonde.fr/economie/article/2026/04/20/grasset-vincent-bollore-prend-la-plume-dans-le-jdd-pour-denoncer-une-petite-caste-qui-se-croit-au-dessus-de-tout-et-de-tous_6681682_3234.html">Grasset : Vincent Bolloré prend la plume dans « Le JDD » pour dénoncer une « petite caste qui se croit au-dessus de tout et de tous »</a></p><p><a href="https://www.lemonde.fr/politique/article/2026/04/20/entre-le-rn-et-le-grand-patronat-des-rendez-vous-de-plus-en-plus-courants-au-benefice-de-chacun_6681610_823448.html">Déjeuner de Jordan Bardella avec le Medef : entre le RN et le grand patronat, des rendez-vous de plus en plus courants, au bénéfice de chacun</a></p><p><a href="https://www.lemonde.fr/politique/article/2026/04/20/le-gouvernement-pret-a-geler-6-milliards-d-euros-de-depenses-pour-tenir-le-budget-2026_6681604_823448.html">Le gouvernement prêt à geler 6 milliards d’euros de dépenses pour tenir le budget 2026</a></p><p><a href="https://www.lemonde.fr/pixels/article/2026/04/19/elon-musk-convoque-lundi-par-la-justice-francaise-apres-quinze-mois-d-une-enquete-tendue_6681466_4408996.html">Elon Musk convoqué lundi par la justice française après quinze mois d’une enquête tendue</a></p><p><a href="https://www.lemonde.fr/idees/article/2026/04/20/on-ne-peut-pas-laisser-a-des-entreprises-privees-juges-et-parties-le-soin-de-definir-les-regles-du-jeu-de-l-ia_6681596_3232.html">« On ne peut pas laisser à des entreprises privées, juges et parties, le soin de définir les règles du jeu de l’IA »</a></p><p><a href="https://www.lemonde.fr/economie/article/2026/04/20/dans-la-presse-ecrite-les-plans-sociaux-se-multiplient-l-audience-et-la-publicite-etant-vampirisees-par-les-geants-du-web_6681607_3234.html">Dans la presse écrite, les plans sociaux se multiplient, l’audience et la publicité étant vampirisées par les géants du Web</a></p><p><a href="https://www.lemonde.fr/international/article/2026/04/19/bulgarie-la-large-victoire-de-l-ex-president-radev-aux-elections-legislatives-gage-de-stabilite-pour-le-pays_6681492_3210.html">Bulgarie : la large victoire de l’ancien président Radev aux élections législatives, gage de stabilité pour le pays</a></p><p><a href="https://www.lemonde.fr/argent/article/2026/04/20/en-bourse-la-tokenisation-s-accelere_6681606_1657007.html">En Bourse, la tokénisation s’accélère</a></p><p><a href="https://www.lemonde.fr/international/live/2026/04/20/en-direct-guerre-en-ukraine-la-russie-a-lance-142-drones-contre-l-ukraine-dans-la-nuit_6681322_3210.html">EN DIRECT, guerre en Ukraine : la Russie a lancé 142 drones contre l’Ukraine dans la nuit</a></p><p><a href="https://www.lemonde.fr/politique/article/2026/04/19/presidentielle-2027-bruno-retailleau-plebiscite-sans-surprises-par-les-adherents-lr-pour-etre-leur-candidat_6681491_823448.html">Présidentielle 2027 : Bruno Retailleau plébiscité sans surprise par les adhérents LR pour être leur candidat</a></p><p><a href="https://www.lemonde.fr/planete/article/2026/04/19/au-museum-national-d-histoire-naturelle-7-000-factures-en-retard-neuf-mois-apres-une-cyberattaque_6681479_3244.html">Au Muséum national d’histoire naturelle, 7 000 factures en retard neuf mois après une cyberattaque</a></p><p><a href="https://www.lemonde.fr/sport/article/2026/04/20/victor-wembanyama-reussit-son-premier-match-en-play-offs-de-la-nba-et-marque-35-points-contre-portland_6681612_3242.html">Victor Wembanyama réussit son premier match en play-offs de la NBA et marque 35 points contre Portland</a></p><p><a href="https://www.lemonde.fr/idees/article/2026/04/19/sarah-rey-historienne-l-extreme-droite-aime-l-antiquite-qui-ne-lui-a-rien-demande_6681467_3232.html">Sarah Rey, historienne : « L’extrême droite aime l’Antiquité, qui ne lui a rien demandé »</a></p><p><a href="https://www.lemonde.fr/sport/article/2026/04/20/steve-stievenart-nageur-de-l-extreme-premier-homme-a-completer-la-triple-couronne-du-bout-du-monde-apres-sa-traversee-du-rio-de-la-plata_6681527_3242.html">Stève Stievenart, nageur de l’extrême, premier homme à compléter la « triple couronne du bout du monde »</a></p><p><a href="https://www.lemonde.fr/international/article/2026/04/20/louisiane-huit-enfants-tues-par-balles-dans-des-violences-intrafamiliales-la-pire-aux-etats-unis-depuis-deux-ans_6681528_3210.html">Louisiane : huit enfants tués par balle dans des violences intrafamiliales, la pire tuerie aux Etats-Unis depuis deux ans</a></p><p><a href="https://www.lemonde.fr/m-perso/article/2026/04/20/yann-pailleret-le-maitre-du-temps-du-jeu-des-1-000-euros_6681605_4497916.html">Yann Pailleret, le maître du temps du « Jeu des 1 000 euros »</a></p><p><a href="https://www.lemonde.fr/international/article/2026/04/19/keir-starmer-choque-par-les-actes-antisemites-a-londres-la-police-britannique-etudie-un-lien-avec-le-regime-iranien_6681474_3210.html">Keir Starmer « choqué » par les actes antisémites à Londres, la police britannique étudie un lien avec « le régime iranien »</a></p><p><a href="https://www.lemonde.fr/sport/article/2026/04/19/ligue-1-lyon-fait-tomber-le-psg-rennes-s-accroche-monaco-cale-encore_6681493_3242.html">Ligue 1 : Lyon fait tomber le PSG, Rennes s’accroche, Monaco cale encore</a></p><h2>Sud Ouest</h2><p><a href="https://www.sudouest.fr/economie/energie/carburants/carburants-le-prix-ne-baissera-pas-de-sitot-selon-michel-edouard-leclerc-qui-propose-la-suspension-de-l-ecotaxe-28758248.php">Carburants : le prix ne « baissera pas de sitôt » selon Michel-Édouard Leclerc qui propose la suspension de l’écotaxe</a></p><p><a href="https://www.sudouest.fr/sante/recherche-medicale/deces-de-nathalie-baye-qu-elle-est-cette-maladie-neurocognitive-qui-a-emporte-l-actrice-28749035.php">Décès de Nathalie Baye : qu’elle est cette maladie neurocognitive qui a emporté l’actrice ?</a></p><p><a href="https://www.sudouest.fr/international/chine/hong-kong-apres-l-incendie-qui-a-fait-168-morts-les-habitants-reviennent-leur-logement-28758164.php">Hong Kong : après l’incendie qui a fait 168 morts, les habitants reviennent leur logement</a></p><p><a href="https://www.sudouest.fr/economie/aeronautique/voyage-en-avion-le-pdg-de-corsair-s-inquiete-davantage-du-cout-du-kerosene-que-d-une-eventuelle-penurie-28758180.php">Voyage en avion : le PDG de Corsair s’inquiète davantage du prix du kérosène que d’une éventuelle pénurie</a></p><p><a href="https://www.sudouest.fr/international/europe/allemagne/jeux-olympiques-large-soutien-populaire-au-projet-de-candidature-rhin-ruhr-pour-les-jeux-d-ete-28758119.php">Jeux olympiques : large soutien populaire au projet de candidature Rhin-Ruhr pour les Jeux d’été</a></p><p><a href="https://www.sudouest.fr/international/europe/ukraine/guerre-en-ukraine-un-mort-dans-une-attaque-de-drones-en-russie-28757942.php">Vidéo. Guerre en Ukraine : un mort dans une attaque de drones sur un port pétrolier de Russie</a></p><p><a href="https://www.sudouest.fr/economie/social/fonction-publique-remuneration-egalite-logement-sans-ministre-les-syndicats-redoutent-une-paralysie-des-reformes-28757987.php">Fonction publique : rémunération, égalité, logement… Sans ministre, les syndicats redoutent une paralysie des réformes</a></p><p><a href="https://www.sudouest.fr/economie/energie/sortie-des-energies-fossiles-apres-l-echec-de-la-cop-50-pays-se-reunissent-en-colombie-28757905.php">Sortie des énergies fossiles : après l’échec de la COP, 50 pays se réunissent en Colombie</a></p><p><a href="https://www.sudouest.fr/faits-divers/narcotrafic/nouvelle-frappe-americaine-contre-un-bateau-de-narcotrafiquants-presumes-dans-les-caraibes-trois-morts-28757754.php">Nouvelle frappe américaine contre un bateau de narcotrafiquants présumés dans les Caraïbes, trois morts</a></p><p><a href="https://www.sudouest.fr/international/asie/coree-du-nord/coree-du-nord-pyongyang-annonce-avoir-teste-des-missiles-tactiques-a-sous-munitions-28757637.php">Corée du Nord : Pyongyang annonce avoir testé des missiles tactiques à sous-munitions</a></p><p><a href="https://www.sudouest.fr/justice/antonio-ferrara-le-braqueur-francais-devant-la-justice-belge-ce-lundi-pour-un-projet-d-attaque-en-allemagne-28757682.php">Antonio Ferrara : le braqueur français devant la justice belge ce lundi pour un projet d’attaque en Allemagne</a></p><p><a href="https://www.sudouest.fr/international/onu-qui-sont-les-quatre-candidats-a-la-succession-d-antonio-guterres-auditionnes-cette-semaine-28757604.php">ONU : qui sont les quatre candidats à la succession d’Antonio Guterres auditionnés cette semaine ?</a></p><p><a href="https://www.sudouest.fr/societe/defense/defense-emmanuel-macron-et-donald-tusk-renforcent-le-partenariat-franco-polonais-sur-fond-de-dissuasion-nucleaire-28757595.php">Défense : Emmanuel Macron et Donald Tusk renforcent le partenariat franco-polonais sur fond de dissuasion nucléaire</a></p><p><a href="https://www.sudouest.fr/justice/elon-musk-attendu-par-la-justice-francaise-ce-lundi-pour-son-enquete-sur-x-va-t-il-se-presenter-28757568.php">Elon Musk, attendu par la justice française ce lundi pour son enquête sur X, va-t-il se présenter ?</a></p><p><a href="https://www.sudouest.fr/international/moyen-orient/direct-guerre-au-moyen-orient-un-cargo-iranien-saisi-par-washington-israel-menace-le-liban-malgre-le-cessez-le-feu-28757563.php">Direct. Guerre au Moyen-Orient : un cargo iranien saisi par Washington, Israël menace le Liban malgré le cessez-le-feu</a></p><p><a href="https://www.sudouest.fr/sport/basket/videos-nba-victor-wembanyama-reussit-sa-premiere-en-play-offs-avec-35-points-et-un-record-avec-les-spurs-28757535.php">Vidéos. NBA : Victor Wembanyama réussit sa première en play-offs avec 35 points et un record avec les Spurs</a></p><p><a href="https://www.sudouest.fr/sante/nutrition/combien-de-tasses-de-cafe-peut-on-boire-par-jour-28637968.php">Combien de tasses de café peut-on boire par jour ?</a></p><p><a href="https://www.sudouest.fr/redaction/ephemeride/video-le-20-avril-1999-la-tuerie-de-columbine-choquait-le-monde-entier-28608652.php">Vidéo. Le 20 avril 1999, la tuerie de Columbine choquait le monde entier</a></p><p><a href="https://www.sudouest.fr/occitanie/toulouse/toulouse-une-gendarme-blesse-grievement-un-homme-qui-agressait-son-collegue-28755994.php">Toulouse : une gendarme blesse grièvement un homme qui agressait son collègue</a></p><p><a href="https://www.sudouest.fr/international/moyen-orient/israel/pour-milei-en-visite-a-jerusalem-la-guerre-contre-l-iran-etait-la-bonne-chose-a-faire-28755698.php">Argentine : pour Milei, en visite à Jérusalem, la guerre contre l’Iran était « la bonne chose à faire »</a></p><h2>Courrier International</h2><p><a href="https://www.courrierinternational.com/article/politique-le-prorusse-roumen-radev-remporte-les-legislatives-bulgares-un-nouveau-orban-pour-l-ue_243118">Le prorusse Roumen Radev remporte les législatives bulgares : un “nouveau Orbán” pour l’UE ?</a></p><p><a href="https://www.courrierinternational.com/article/pendant-que-vous-dormiez-bulgarie-espagne-etats-unis-et-tennis-les-informations-de-la-nuit_243115">Bulgarie, Espagne, États-Unis et tennis : les informations de la nuit</a></p><p><a href="https://www.courrierinternational.com/article/moyen-orient-guerre-en-iran-incertitudes-sur-de-nouveaux-pourparlers-entre-teheran-et-washington_243116">Guerre en Iran : incertitudes sur de nouveaux pourparlers entre Téhéran et Washington</a></p><p><a href="https://www.courrierinternational.com/article/football-la-coupe-du-monde-que-tout-le-monde-va-detester_243073">La Coupe du monde que tout le monde va détester</a></p><p><a href="https://www.courrierinternational.com/article/cybersecurite-a-singapour-les-bons-citoyens-sont-plus-vulnerables-aux-arnaques_241898">À Singapour, les bons citoyens sont plus vulnérables aux arnaques</a></p><p><a href="https://www.courrierinternational.com/article/vu-d-allemagne-l-allemagne-doit-s-inspirer-du-systeme-de-sante-francais_242625">Santé : les Français payent moins cher et vivent plus longtemps</a></p><p><a href="https://www.courrierinternational.com/article/economie-dans-le-golfe-les-repercussions-a-long-terme-de-la-guerre-risquent-d-etre-considerables_243048">Dans le Golfe, les répercussions à long terme de la guerre risquent d’être considérables</a></p><p><a href="https://www.courrierinternational.com/article/moyen-orient-l-uranium-enrichi-iranien-l-autre-point-de-blocage-entre-washington-et-teheran_243114">L’uranium enrichi iranien, l’autre point de blocage entre Washington et Téhéran</a></p><p><a href="https://www.courrierinternational.com/article/election-presidentielle-la-course-pour-2027-passionne-deja-la-presse-europeenne_242714">La course pour 2027 passionne déjà la presse européenne</a></p><p><a href="https://www.courrierinternational.com/article/jeux-au-c-ur-des-competitions-de-puzzle-ou-les-equipes-visent-l-efficacite-d-une-formule-1_242947">Au cœur des compétitions de puzzle où les équipes visent “l’efficacité d’une Formule 1”</a></p><p><a href="https://www.courrierinternational.com/article/vu-du-royaume-uni-ils-ont-tout-quitte-par-amour-et-l-ont-regrette_242343">Ils ont tout quitté par amour… et l’ont regretté</a></p><p><a href="https://www.courrierinternational.com/article/tribune-la-tragedie-de-mon-pays-le-soudan-est-tombee-dans-l-oubli-general_242958">La tragédie de mon pays, le Soudan, est tombée dans l’oubli général</a></p><p><a href="https://www.courrierinternational.com/article/pelerinage-face-a-l-explosion-des-delais-d-attente-l-indonesie-propose-une-guerre-des-billets-pour-la-mecque_243088">Face à l’explosion des délais d’attente, l’Indonésie propose une “guerre des billets” pour La Mecque</a></p><p><a href="https://www.courrierinternational.com/article/technologie-a-pekin-un-robot-humanoide-pulverise-le-record-du-monde-humain-du-semi-marathon_243113">À Pékin, un robot humanoïde pulvérise le record du monde humain du semi-marathon</a></p><p><a href="https://www.courrierinternational.com/article/equateur-dans-les-rues-de-quito-le-realisme-magique-des-chevres_242395">Dans les rues de Quito, le réalisme magique des chèvres</a></p><p><a href="https://www.courrierinternational.com/article/television-qu-attend-l-allemagne-pour-s-inspirer-des-emissions-litteraires-francaises_242856">Qu’attend l’Allemagne pour s’inspirer des émissions littéraires françaises ?</a></p><p><a href="https://www.courrierinternational.com/grand-format/infographie-on-y-mise-sur-le-sport-comme-sur-la-politique-polymarket-et-kalshi-en-chiffres_242885">On y mise sur le sport comme sur la politique : Polymarket et Kalshi en chiffres</a></p><p><a href="https://www.courrierinternational.com/article/analyse-de-reine-des-mers-a-coquille-vide-la-marine-britannique-agonise_242811">De reine des mers à coquille vide, la marine britannique agonise</a></p><p><a href="https://www.courrierinternational.com/stories/reportage-une-ville-pour-240-000-euros-en-australie-cooladdi-cherche-preneur_242768">Une ville pour 240 000 euros ? En Australie, Cooladdi cherche preneur</a></p></body></html>
+<body class="dark">
+  <header>
+    <span class="logo">📰 News & Actus</span>
+    <div class="header-right">
+      <span id="lastUpdate">Mise à jour : 20/04/2026 07:59:45 UTC</span>
+      <button id="toggleMode" onclick="toggleMode()">☀️ Mode clair</button>
+    </div>
+  </header>
+  <main>
+    <div class="card">
+      <h2>🤖 Résumé de l'actualité</h2>
+      <div class="ia-badge">✨ Généré par IA</div>
+      <div class="resume-ia">L'actualité des dernières 24 heures est marquée par plusieurs thèmes, notamment : guerre, monde, contre, tout, lundi. Ces sujets reflètent les tensions internationales et les débats du moment.</div>
+    </div>
+    <div class="news-grid">
+      
+        <div class="card">
+          <h2>🔵 Le Monde</h2>
+          <div class="news-list" id="le_monde">
+            
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/international/live/2026/04/20/en-direct-guerre-au-moyen-orient-j-d-vance-attendu-au-pakistan-pour-de-nouvelles-negociations-l-iran-ne-compte-pas-discuter-a-nouveau-avec-les-etats-unis_6679867_3210.html" target="_blank" rel="noopener">EN DIRECT, guerre au Moyen-Orient : J. D. Vance attendu au Pakistan pour de nouvelles négociations ; l’Iran ne compte pas discuter à nouveau avec les Etats-Unis</a>
+      <div class="news-resume">Des médias iraniens avancent qu’une levée du blocus naval américain serait une condition préalable à des pourparlers. Une question rendue encore plus compliquée par l’annonce dimanche de la saisie par…</div>
+      <div class="news-date">20 Apr, 08:03</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/economie/article/2026/04/20/grasset-vincent-bollore-prend-la-plume-dans-le-jdd-pour-denoncer-une-petite-caste-qui-se-croit-au-dessus-de-tout-et-de-tous_6681682_3234.html" target="_blank" rel="noopener">Grasset : Vincent Bolloré prend la plume dans « Le JDD » pour dénoncer une « petite caste qui se croit au-dessus de tout et de tous »</a>
+      <div class="news-resume">Dans une tribune publiée dans « Le Journal du dimanche », qu’il contrôle, le milliardaire breton s’en prend à l’éditeur Olivier Nora, qu’il a limogé, s’étonnant du « séisme » provoqué par son départ. …</div>
+      <div class="news-date">20 Apr, 09:12</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/politique/article/2026/04/20/entre-le-rn-et-le-grand-patronat-des-rendez-vous-de-plus-en-plus-courants-au-benefice-de-chacun_6681610_823448.html" target="_blank" rel="noopener">Déjeuner de Jordan Bardella avec le Medef : entre le RN et le grand patronat, des rendez-vous de plus en plus courants, au bénéfice de chacun</a>
+      <div class="news-resume">Les patrons du CAC 40 n’hésitent plus à rencontrer officiellement les dirigeants du Rassemblement national. Il s’agit pour eux de peser sur le programme économique de l’un des favoris de 2027, tandis …</div>
+      <div class="news-date">20 Apr, 06:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/politique/article/2026/04/20/le-gouvernement-pret-a-geler-6-milliards-d-euros-de-depenses-pour-tenir-le-budget-2026_6681604_823448.html" target="_blank" rel="noopener">Le gouvernement prêt à geler 6 milliards d’euros de dépenses pour tenir le budget 2026</a>
+      <div class="news-resume">Lors du comité d’alerte, prévu mardi, l’exécutif devrait annoncer des économies d’environ 4 milliards d’euros pour l’Etat et de 2 milliards pour la Sécurité sociale. Objectif : réduire le déficit malg…</div>
+      <div class="news-date">20 Apr, 05:30</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/pixels/article/2026/04/19/elon-musk-convoque-lundi-par-la-justice-francaise-apres-quinze-mois-d-une-enquete-tendue_6681466_4408996.html" target="_blank" rel="noopener">Elon Musk convoqué lundi par la justice française après quinze mois d’une enquête tendue</a>
+      <div class="news-resume">Le parquet de Paris enquête depuis janvier 2025 sur de nombreux abus prêtés au réseau social X et à son dirigeant. Le milliardaire a été convoqué, lundi, pour une audition libre.</div>
+      <div class="news-date">19 Apr, 17:00</div>
+    </div><div id="more-le_monde" style="display:none">
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/idees/article/2026/04/20/on-ne-peut-pas-laisser-a-des-entreprises-privees-juges-et-parties-le-soin-de-definir-les-regles-du-jeu-de-l-ia_6681596_3232.html" target="_blank" rel="noopener">« On ne peut pas laisser à des entreprises privées, juges et parties, le soin de définir les règles du jeu de l’IA »</a>
+      <div class="news-resume">Les propositions d’OpenAI, acteur majeur de l’intelligence artificielle, dirigé par Sam Altman, soulèvent des questions sur l’atténuation des risques sociaux et sur le partage des bénéfices de cette r…</div>
+      <div class="news-date">20 Apr, 05:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/economie/article/2026/04/20/dans-la-presse-ecrite-les-plans-sociaux-se-multiplient-l-audience-et-la-publicite-etant-vampirisees-par-les-geants-du-web_6681607_3234.html" target="_blank" rel="noopener">Dans la presse écrite, les plans sociaux se multiplient, l’audience et la publicité étant vampirisées par les géants du Web</a>
+      <div class="news-resume">Depuis décembre 2025, les acteurs de la presse magazine ou régionale ont annoncé la suppression de près d’un millier d’emplois, menaçant la pérennité de nombreuses rédactions.</div>
+      <div class="news-date">20 Apr, 06:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/international/article/2026/04/19/bulgarie-la-large-victoire-de-l-ex-president-radev-aux-elections-legislatives-gage-de-stabilite-pour-le-pays_6681492_3210.html" target="_blank" rel="noopener">Bulgarie : la large victoire de l’ancien président Radev aux élections législatives, gage de stabilité pour le pays</a>
+      <div class="news-resume">Crédité d’environ 130 sièges sur 240 au Parlement, Roumen Radev obtient une majorité absolue dans un pays marqué par une grande fragmentation politique au cours des dernières années.</div>
+      <div class="news-date">19 Apr, 23:45</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/argent/article/2026/04/20/en-bourse-la-tokenisation-s-accelere_6681606_1657007.html" target="_blank" rel="noopener">En Bourse, la tokénisation s’accélère</a>
+      <div class="news-resume">Ce processus technologique, emprunté à l’univers des cryptoactifs, permettrait des transactions plus rapides, vingt-quatre heures sur vingt-quatre.</div>
+      <div class="news-date">20 Apr, 06:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/international/live/2026/04/20/en-direct-guerre-en-ukraine-la-russie-a-lance-142-drones-contre-l-ukraine-dans-la-nuit_6681322_3210.html" target="_blank" rel="noopener">EN DIRECT, guerre en Ukraine : la Russie a lancé 142 drones contre l’Ukraine dans la nuit</a>
+      <div class="news-resume">Selon l’armée de l’air ukrainienne, certains drones que la Russie a lancés étaient à propulsion à réaction. Environ une centaine de ces appareils étaient des drones d’attaque à long rayon d’action. Se…</div>
+      <div class="news-date">20 Apr, 09:06</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/politique/article/2026/04/19/presidentielle-2027-bruno-retailleau-plebiscite-sans-surprises-par-les-adherents-lr-pour-etre-leur-candidat_6681491_823448.html" target="_blank" rel="noopener">Présidentielle 2027 : Bruno Retailleau plébiscité sans surprise par les adhérents LR pour être leur candidat</a>
+      <div class="news-resume">A plus de 73 %, les encartés Les Républicains ont investi leur président pour briguer l’Elysée. Lors de cette consultation interne, les options d’une primaire fermée ou semi-ouverte étaient aussi prop…</div>
+      <div class="news-date">19 Apr, 22:48</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/planete/article/2026/04/19/au-museum-national-d-histoire-naturelle-7-000-factures-en-retard-neuf-mois-apres-une-cyberattaque_6681479_3244.html" target="_blank" rel="noopener">Au Muséum national d’histoire naturelle, 7 000 factures en retard neuf mois après une cyberattaque</a>
+      <div class="news-resume">Le président du Muséum national d’histoire naturelle, Gilles Bloch, affirme que cet acte de malveillance émane d’un « grand pays peu démocratique ».</div>
+      <div class="news-date">19 Apr, 19:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/sport/article/2026/04/20/victor-wembanyama-reussit-son-premier-match-en-play-offs-de-la-nba-et-marque-35-points-contre-portland_6681612_3242.html" target="_blank" rel="noopener">Victor Wembanyama réussit son premier match en play-offs de la NBA et marque 35 points contre Portland</a>
+      <div class="news-resume">Les Spurs ont gagné (111-98) contre les Trail Blazers dimanche 19 avril, à domicile à San Antonio.</div>
+      <div class="news-date">20 Apr, 06:24</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/idees/article/2026/04/19/sarah-rey-historienne-l-extreme-droite-aime-l-antiquite-qui-ne-lui-a-rien-demande_6681467_3232.html" target="_blank" rel="noopener">Sarah Rey, historienne : « L’extrême droite aime l’Antiquité, qui ne lui a rien demandé »</a>
+      <div class="news-resume">Dans une tribune au « Monde », l’universitaire spécialiste d’histoire ancienne retrace la généalogie des récupérations par l’extrême droite des référents de l’antiquité gréco-romaine, et s’interroge s…</div>
+      <div class="news-date">19 Apr, 17:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/sport/article/2026/04/20/steve-stievenart-nageur-de-l-extreme-premier-homme-a-completer-la-triple-couronne-du-bout-du-monde-apres-sa-traversee-du-rio-de-la-plata_6681527_3242.html" target="_blank" rel="noopener">Stève Stievenart, nageur de l’extrême, premier homme à compléter la « triple couronne du bout du monde »</a>
+      <div class="news-resume">Le Français, surnommé « Stève le Phoque », a mis 17 h 59 min 33 sec pour traverser à la nage le rio de la Plata, en Argentine, soit 43 kilomètres.</div>
+      <div class="news-date">20 Apr, 01:31</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/international/article/2026/04/20/louisiane-huit-enfants-tues-par-balles-dans-des-violences-intrafamiliales-la-pire-aux-etats-unis-depuis-deux-ans_6681528_3210.html" target="_blank" rel="noopener">Louisiane : huit enfants tués par balle dans des violences intrafamiliales, la pire tuerie aux Etats-Unis depuis deux ans</a>
+      <div class="news-resume">L’homme suspecté d’être l’auteur des faits, dont l’identité n’a pas été révélée, a été tué par les policiers.</div>
+      <div class="news-date">20 Apr, 02:04</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/sport/article/2026/04/19/arthur-fils-remporte-le-tournoi-de-tennis-de-barcelone-le-quatrieme-titre-de-sa-carriere_6681475_3242.html" target="_blank" rel="noopener">Arthur Fils remporte le tournoi de tennis de Barcelone, le quatrième titre de sa carrière</a>
+      <div class="news-resume">Le tennisman français de 21 ans a dominé Andrey Rublev en deux sets, dimanche en Catalogne, et décroché son premier titre de la saison, sur terre battue, à un mois du début de Roland-Garros.</div>
+      <div class="news-date">19 Apr, 18:16</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/international/article/2026/04/19/keir-starmer-choque-par-les-actes-antisemites-a-londres-la-police-britannique-etudie-un-lien-avec-le-regime-iranien_6681474_3210.html" target="_blank" rel="noopener">Keir Starmer « choqué » par les actes antisémites à Londres, la police britannique étudie un lien avec « le régime iranien »</a>
+      <div class="news-resume">Une nouvelle attaque s’est produite dans la nuit de samedi à dimanche, visant une synagogue. Elle n’a pas fait de blessé et les dégâts sont mineurs, mais l’inquiétude grandit au sein de la communauté …</div>
+      <div class="news-date">19 Apr, 18:06</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/m-perso/article/2026/04/20/yann-pailleret-le-maitre-du-temps-du-jeu-des-1-000-euros_6681605_4497916.html" target="_blank" rel="noopener">Yann Pailleret, le maître du temps du « Jeu des 1 000 euros »</a>
+      <div class="news-resume">« La France buissonnière ». Fidèle compagnon de l’inépuisable « Jeu des 1 000 euros » sur France Inter, le « réalisateur » rythme depuis trente-cinq ans le défilement des secondes sur le mythique méta…</div>
+      <div class="news-date">20 Apr, 05:45</div>
+    </div></div><button class="btn-more" onclick="afficherPlus('le_monde')">▼ Afficher plus (14)</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>🟠 Sud Ouest</h2>
+          <div class="news-list" id="sud_ouest">
+            
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/economie/energie/carburants/carburants-le-prix-ne-baissera-pas-de-sitot-selon-michel-edouard-leclerc-qui-propose-la-suspension-de-l-ecotaxe-28758248.php" target="_blank" rel="noopener">Carburants : le prix ne « baissera pas de sitôt » selon Michel-Édouard Leclerc qui propose la suspension de l’écotaxe</a>
+      <div class="news-resume">« Pour le moment c’est du yoyo » prévient Michel-Édouard Leclerc qui constate la volatilité des cours du pétrole. Il propose la suspension des primes CEE pour faire baisser de 10 à 17 centimes le prix</div>
+      <div class="news-date">20 Apr, 09:29</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/sante/recherche-medicale/deces-de-nathalie-baye-qu-elle-est-cette-maladie-neurocognitive-qui-a-emporte-l-actrice-28749035.php" target="_blank" rel="noopener">Décès de Nathalie Baye : qu’elle est cette maladie neurocognitive qui a emporté l’actrice ?</a>
+      <div class="news-resume">Les proches de l’actrice Nathalie Baye ont annoncé son décès samedi 18 avril. Âgée de 77 ans, elle était atteinte de la maladie à corps de Lewy. Moins connue que les maladies d’Alzheimer ou de Parkins…</div>
+      <div class="news-date">20 Apr, 09:26</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/international/chine/hong-kong-apres-l-incendie-qui-a-fait-168-morts-les-habitants-reviennent-leur-logement-28758164.php" target="_blank" rel="noopener">Hong Kong : après l’incendie qui a fait 168 morts, les habitants reviennent leur logement</a>
+      <div class="news-resume">Six mois après le dramatique incendie du complexe Wang Fuk Court, les habitants peuvent pour la première fois revenir sur place afin de récupérer le reste de leurs affaires</div>
+      <div class="news-date">20 Apr, 09:15</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/economie/aeronautique/voyage-en-avion-le-pdg-de-corsair-s-inquiete-davantage-du-cout-du-kerosene-que-d-une-eventuelle-penurie-28758180.php" target="_blank" rel="noopener">Voyage en avion : le PDG de Corsair s’inquiète davantage du prix du kérosène que d’une éventuelle pénurie</a>
+      <div class="news-resume">Pascal de Izaguirre, PDG de Corsair, souligne l’impact économique majeur de la hausse des prix du carburant sur le secteur aérien tout en se voulant rassurant sur les stocks disponibles</div>
+      <div class="news-date">20 Apr, 09:15</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/international/europe/allemagne/jeux-olympiques-large-soutien-populaire-au-projet-de-candidature-rhin-ruhr-pour-les-jeux-d-ete-28758119.php" target="_blank" rel="noopener">Jeux olympiques : large soutien populaire au projet de candidature Rhin-Ruhr pour les Jeux d’été</a>
+      <div class="news-resume">Les habitants de 17 villes de Rhénanie-du-Nord-Westphalie ont approuvé le projet de candidature pour les Jeux olympiques d’été de 2036, 2040 ou 2044</div>
+      <div class="news-date">20 Apr, 08:59</div>
+    </div><div id="more-sud_ouest" style="display:none">
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/international/europe/ukraine/guerre-en-ukraine-un-mort-dans-une-attaque-de-drones-en-russie-28757942.php" target="_blank" rel="noopener">Vidéo. Guerre en Ukraine : un mort dans une attaque de drones sur un port pétrolier de Russie</a>
+      <div class="news-resume">Un homme est mort dans une attaque ukrainienne de drones à Touapsé, ville russe des bords de la mer Noire attaquée pour la deuxième fois en moins d’une semaine</div>
+      <div class="news-date">20 Apr, 08:50</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/economie/social/fonction-publique-remuneration-egalite-logement-sans-ministre-les-syndicats-redoutent-une-paralysie-des-reformes-28757987.php" target="_blank" rel="noopener">Fonction publique : rémunération, égalité, logement… Sans ministre, les syndicats redoutent une paralysie des réformes</a>
+      <div class="news-resume">Entre absence de ministre dédié et priorité budgétaire, les agents publics s’inquiètent d’un immobilisme durable malgré l’urgence des revendications salariales sur les rémunérations ou l’avenir des mé…</div>
+      <div class="news-date">20 Apr, 08:25</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/economie/energie/sortie-des-energies-fossiles-apres-l-echec-de-la-cop-50-pays-se-reunissent-en-colombie-28757905.php" target="_blank" rel="noopener">Sortie des énergies fossiles : après l’échec de la COP, 50 pays se réunissent en Colombie</a>
+      <div class="news-resume">Plus de 50 nations se réunissent en Colombie pour débattre de la sortie progressive des énergies fossiles dans un contexte de crise énergétique mondiale</div>
+      <div class="news-date">20 Apr, 08:04</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/faits-divers/narcotrafic/nouvelle-frappe-americaine-contre-un-bateau-de-narcotrafiquants-presumes-dans-les-caraibes-trois-morts-28757754.php" target="_blank" rel="noopener">Nouvelle frappe américaine contre un bateau de narcotrafiquants présumés dans les Caraïbes, trois morts</a>
+      <div class="news-resume">Avec cette nouvelle exécution extrajudiciaire, le nombre total de victimes de ces attaques atteint le chiffre de 180</div>
+      <div class="news-date">20 Apr, 07:53</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/international/asie/coree-du-nord/coree-du-nord-pyongyang-annonce-avoir-teste-des-missiles-tactiques-a-sous-munitions-28757637.php" target="_blank" rel="noopener">Corée du Nord : Pyongyang annonce avoir testé des missiles tactiques à sous-munitions</a>
+      <div class="news-resume">La Corée du Nord a procédé à un nouvel essai de missiles balistiques équipés d'ogives à fragmentation, une technologie qui inquiète Séoul et les autorités militaires américaines</div>
+      <div class="news-date">20 Apr, 07:42</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/justice/antonio-ferrara-le-braqueur-francais-devant-la-justice-belge-ce-lundi-pour-un-projet-d-attaque-en-allemagne-28757682.php" target="_blank" rel="noopener">Antonio Ferrara : le braqueur français devant la justice belge ce lundi pour un projet d’attaque en Allemagne</a>
+      <div class="news-resume">Le « roi de la belle » avait été arrêté en Belgique en 2025 avec d’autres complices présumés, suspectés de projeter le braquage d’un centre-fort en Allemagne</div>
+      <div class="news-date">20 Apr, 07:29</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/international/onu-qui-sont-les-quatre-candidats-a-la-succession-d-antonio-guterres-auditionnes-cette-semaine-28757604.php" target="_blank" rel="noopener">ONU : qui sont les quatre candidats à la succession d’Antonio Guterres auditionnés cette semaine ?</a>
+      <div class="news-resume">Quatre candidats déclarés pour succéder au secrétaire général seront auditionnés cette semaine en public, étape préliminaire avant de désigner celui ou celle qui dirigera une organisation en pleine te…</div>
+      <div class="news-date">20 Apr, 07:09</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/societe/defense/defense-emmanuel-macron-et-donald-tusk-renforcent-le-partenariat-franco-polonais-sur-fond-de-dissuasion-nucleaire-28757595.php" target="_blank" rel="noopener">Défense : Emmanuel Macron et Donald Tusk renforcent le partenariat franco-polonais sur fond de dissuasion nucléaire</a>
+      <div class="news-resume">Le président français et le Premier ministre polonais se réunissent pour approfondir leur coopération militaire, avec au programme la dissuasion nucléaire, les satellites et l’industrie de défense</div>
+      <div class="news-date">20 Apr, 06:53</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/justice/elon-musk-attendu-par-la-justice-francaise-ce-lundi-pour-son-enquete-sur-x-va-t-il-se-presenter-28757568.php" target="_blank" rel="noopener">Elon Musk, attendu par la justice française ce lundi pour son enquête sur X, va-t-il se présenter ?</a>
+      <div class="news-resume">Le patron du réseau social, qui a dénoncé « une attaque politique », est convoqué en audition libre à Paris dans le cadre d’une enquête sur les possibles dérives de X</div>
+      <div class="news-date">20 Apr, 06:43</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/international/moyen-orient/direct-guerre-au-moyen-orient-un-cargo-iranien-saisi-par-washington-israel-menace-le-liban-malgre-le-cessez-le-feu-28757563.php" target="_blank" rel="noopener">Direct. Guerre au Moyen-Orient : un cargo iranien saisi par Washington, Israël menace le Liban malgré le cessez-le-feu</a>
+      <div class="news-resume">À deux jours de l’expiration du cessez-le-feu entre l’Iran et les États-Unis, les négociations sont au point mort : Téhéran promet de «riposter bientôt» à la prise de contrôle par la marine américaine</div>
+      <div class="news-date">20 Apr, 06:32</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/sport/basket/videos-nba-victor-wembanyama-reussit-sa-premiere-en-play-offs-avec-35-points-et-un-record-avec-les-spurs-28757535.php" target="_blank" rel="noopener">Vidéos. NBA : Victor Wembanyama réussit sa première en play-offs avec 35 points et un record avec les Spurs</a>
+      <div class="news-resume">L’intérieur français a très largement contribué au succès des San Antonio Spurs contre les Portland Trail Blazers dimanche à domicile (111-98), pour son premier match de play-offs</div>
+      <div class="news-date">20 Apr, 06:24</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/sante/nutrition/combien-de-tasses-de-cafe-peut-on-boire-par-jour-28637968.php" target="_blank" rel="noopener">Combien de tasses de café peut-on boire par jour ?</a>
+      <div class="news-resume">Lorsque vous buvez un café, la caféine est absorbée rapidement par l’organisme. Ainsi, ses effets stimulants peuvent survenir entre 15 à 30 minutes après l’ingestion et durer plusieurs heures</div>
+      <div class="news-date">20 Apr, 06:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/redaction/ephemeride/video-le-20-avril-1999-la-tuerie-de-columbine-choquait-le-monde-entier-28608652.php" target="_blank" rel="noopener">Vidéo. Le 20 avril 1999, la tuerie de Columbine choquait le monde entier</a>
+      <div class="news-resume">ÉPHÉMÉRIDE DU 20 AVRIL - Voici tout ce qu’il faut savoir pour bien commencer la journée… Aujourd’hui, on fête les Odette. Et aussi Odélie, Ovida, …</div>
+      <div class="news-date">20 Apr, 04:30</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/occitanie/toulouse/toulouse-une-gendarme-blesse-grievement-un-homme-qui-agressait-son-collegue-28755994.php" target="_blank" rel="noopener">Toulouse : une gendarme blesse grièvement un homme qui agressait son collègue</a>
+      <div class="news-resume">« Touché au thorax », l’homme d’une quarantaine d’années est en réanimation a expliqué le procureur de la République de Toulouse</div>
+      <div class="news-date">19 Apr, 21:42</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.sudouest.fr/international/moyen-orient/israel/pour-milei-en-visite-a-jerusalem-la-guerre-contre-l-iran-etait-la-bonne-chose-a-faire-28755698.php" target="_blank" rel="noopener">Argentine : pour Milei, en visite à Jérusalem, la guerre contre l’Iran était « la bonne chose à faire »</a>
+      <div class="news-resume">« L’Argentine a été victime d’attaques terroristes lâches » au début des années 1990, « toutes deux orchestrées par la République islamique d’Iran », a déclaré le président argentin dans un communiqué</div>
+      <div class="news-date">19 Apr, 21:02</div>
+    </div></div><button class="btn-more" onclick="afficherPlus('sud_ouest')">▼ Afficher plus (15)</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>🟢 Courrier International</h2>
+          <div class="news-list" id="courrier_international">
+            
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/politique-le-prorusse-roumen-radev-remporte-les-legislatives-bulgares-un-nouveau-orban-pour-l-ue_243118" target="_blank" rel="noopener">Le prorusse Roumen Radev remporte les législatives bulgares : un “nouveau Orbán” pour l’UE ?</a>
+      <div class="news-resume">Avec près de 45 % des voix, Bulgarie progressiste, la coalition de l’ancien président, disposera d’une majorité absolue. Cela met fin à un long cycle d’instabilité politique et ouvre une nouvelle page…</div>
+      <div class="news-date">20 Apr, 09:43</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/pendant-que-vous-dormiez-bulgarie-espagne-etats-unis-et-tennis-les-informations-de-la-nuit_243115" target="_blank" rel="noopener">Bulgarie, Espagne, États-Unis et tennis : les informations de la nuit</a>
+      <div class="news-resume">Les principales actualités de ces dernières heures vues par la presse internationale.</div>
+      <div class="news-date">20 Apr, 05:51</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/moyen-orient-guerre-en-iran-incertitudes-sur-de-nouveaux-pourparlers-entre-teheran-et-washington_243116" target="_blank" rel="noopener">Guerre en Iran : incertitudes sur de nouveaux pourparlers entre Téhéran et Washington</a>
+      <div class="news-resume">Donald Trump a annoncé dimanche qu’une délégation américaine se rendrait lundi à Islamabad pour de nouveaux pourparlers avec l’Iran sur un accord de paix. Mais les autorités iraniennes ont répliqué qu…</div>
+      <div class="news-date">20 Apr, 05:50</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/football-la-coupe-du-monde-que-tout-le-monde-va-detester_243073" target="_blank" rel="noopener">La Coupe du monde que tout le monde va détester</a>
+      <div class="news-resume">Après le prix des billets, a été révélé les derniers jours celui – “révoltant” – des navettes pour se rendre dans les stades américains pendant la Coupe du monde de football 2026. Indigné, ce journali…</div>
+      <div class="news-date">20 Apr, 05:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/cybersecurite-a-singapour-les-bons-citoyens-sont-plus-vulnerables-aux-arnaques_241898" target="_blank" rel="noopener">À Singapour, les bons citoyens sont plus vulnérables aux arnaques</a>
+      <div class="news-resume">Malgré les campagnes de prévention, les escrocs qui se font passer pour des fonctionnaires soutirent des millions de dollars aux Singapouriens. Pour y remédier, il faudrait apprendre aux citoyens à se…</div>
+      <div class="news-date">20 Apr, 05:00</div>
+    </div><div id="more-courrier_international" style="display:none">
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/vu-d-allemagne-l-allemagne-doit-s-inspirer-du-systeme-de-sante-francais_242625" target="_blank" rel="noopener">Santé : les Français payent moins cher et vivent plus longtemps</a>
+      <div class="news-resume">Alors que l’Allemagne débat une nouvelle fois de son système de santé, “Der Spiegel” s’est demandé ce que son voisin d’outre-Rhin faisait de mieux dans ce domaine. Avec plus de prévention et une meill…</div>
+      <div class="news-date">20 Apr, 05:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/economie-dans-le-golfe-les-repercussions-a-long-terme-de-la-guerre-risquent-d-etre-considerables_243048" target="_blank" rel="noopener">Dans le Golfe, les répercussions à long terme de la guerre risquent d’être considérables</a>
+      <div class="news-resume">En plus des coûts immédiats, le conflit au Moyen-Orient risque de réorienter la stratégie d’investissements, de réduire la marge des fonds souverains et de retarder, par conséquent, la diversification…</div>
+      <div class="news-date">20 Apr, 05:00</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/moyen-orient-l-uranium-enrichi-iranien-l-autre-point-de-blocage-entre-washington-et-teheran_243114" target="_blank" rel="noopener">L’uranium enrichi iranien, l’autre point de blocage entre Washington et Téhéran</a>
+      <div class="news-resume">Avec la réouverture du détroit d’Ormuz, le sort des 440 kilos d’uranium enrichi à 60 % détenus par l’Iran est au cœur des négociations avec les États-Unis, assure la presse étrangère. Le président amé…</div>
+      <div class="news-date">19 Apr, 18:01</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/election-presidentielle-la-course-pour-2027-passionne-deja-la-presse-europeenne_242714" target="_blank" rel="noopener">La course pour 2027 passionne déjà la presse européenne</a>
+      <div class="news-resume">À un an de l’élection présidentielle, les médias européens de droite comme de gauche suivent de près la vie politique française. Et s’en inquiètent.</div>
+      <div class="news-date">19 Apr, 17:41</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/jeux-au-c-ur-des-competitions-de-puzzle-ou-les-equipes-visent-l-efficacite-d-une-formule-1_242947" target="_blank" rel="noopener">Au cœur des compétitions de puzzle où les équipes visent “l’efficacité d’une Formule 1”</a>
+      <div class="news-resume">Depuis les confinements provoqués par le Covid-19, les puzzles ont le vent en poupe, fédérant des milliers de passionnés qui se rassemblent pour des compétitions de rapidité. Des tournois exigeants po…</div>
+      <div class="news-date">19 Apr, 16:51</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/vu-du-royaume-uni-ils-ont-tout-quitte-par-amour-et-l-ont-regrette_242343" target="_blank" rel="noopener">Ils ont tout quitté par amour… et l’ont regretté</a>
+      <div class="news-resume">Changer de pays peut fragiliser un couple et non rapprocher les conjoints. Récits d’expatriés désenchantés, entre isolement et perte de repères, dans “The Guardian”.</div>
+      <div class="news-date">19 Apr, 15:19</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/tribune-la-tragedie-de-mon-pays-le-soudan-est-tombee-dans-l-oubli-general_242958" target="_blank" rel="noopener">La tragédie de mon pays, le Soudan, est tombée dans l’oubli général</a>
+      <div class="news-resume">Le 15 avril 2023, le pays de la Corne de l’Afrique plongeait dans une guerre qui oppose l’armée régulière à ses anciens alliés paramilitaires des Forces de soutien rapide. Dans une tribune publiée par…</div>
+      <div class="news-date">19 Apr, 14:57</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/pelerinage-face-a-l-explosion-des-delais-d-attente-l-indonesie-propose-une-guerre-des-billets-pour-la-mecque_243088" target="_blank" rel="noopener">Face à l’explosion des délais d’attente, l’Indonésie propose une “guerre des billets” pour La Mecque</a>
+      <div class="news-resume">L’Arabie saoudite accorde environ 220 000 places à l’Indonésie pour le pèlerinage à La Mecque. Mais dans le plus grand pays musulman du monde, ce quota ne répond pas à la demande et les délais d’atten…</div>
+      <div class="news-date">19 Apr, 14:09</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/technologie-a-pekin-un-robot-humanoide-pulverise-le-record-du-monde-humain-du-semi-marathon_243113" target="_blank" rel="noopener">À Pékin, un robot humanoïde pulvérise le record du monde humain du semi-marathon</a>
+      <div class="news-resume">En bouclant ses 21,0975 kilomètres en 50 minutes et 26 secondes, le robot “Lightning”, développé par la société Honor, a battu de plus de six minutes le record du semi-marathon détenu par l’Ougandais …</div>
+      <div class="news-date">19 Apr, 12:34</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/equateur-dans-les-rues-de-quito-le-realisme-magique-des-chevres_242395" target="_blank" rel="noopener">Dans les rues de Quito, le réalisme magique des chèvres</a>
+      <div class="news-resume">Remède de grand-mère mais infraction municipale, le lait cru de chèvre fraîchement sorti du pis au pied des feux tricolores de la capitale équatorienne symbolise la fragile connexion de celle-ci avec …</div>
+      <div class="news-date">19 Apr, 12:30</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/television-qu-attend-l-allemagne-pour-s-inspirer-des-emissions-litteraires-francaises_242856" target="_blank" rel="noopener">Qu’attend l’Allemagne pour s’inspirer des émissions littéraires françaises ?</a>
+      <div class="news-resume">En France, “La Grande Librairie” propose toujours des débats d’idées entre des auteurs variés, de Leïla Slimani à Alain Finkielkraut. Pendant ce temps, outre-Rhin, un critique littéraire jette sans ve…</div>
+      <div class="news-date">19 Apr, 12:04</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/grand-format/infographie-on-y-mise-sur-le-sport-comme-sur-la-politique-polymarket-et-kalshi-en-chiffres_242885" target="_blank" rel="noopener">On y mise sur le sport comme sur la politique : Polymarket et Kalshi en chiffres</a>
+      <div class="news-resume">Les deux plateformes “ont tout de sites de paris”, souligne le quotidien “The Guardian”, mais elles se présentent comme des “marchés de prédictions”. Une subtilité juridique qui rend plus difficile le…</div>
+      <div class="news-date">19 Apr, 11:41</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/analyse-de-reine-des-mers-a-coquille-vide-la-marine-britannique-agonise_242811" target="_blank" rel="noopener">De reine des mers à coquille vide, la marine britannique agonise</a>
+      <div class="news-resume">La guerre en Iran a mis en exergue la faiblesse de la Royal Navy, jadis force maritime la plus puissante au monde. Le résultat d’un désintérêt politique qui a débuté au lendemain de la guerre froide, …</div>
+      <div class="news-date">19 Apr, 10:57</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/stories/reportage-une-ville-pour-240-000-euros-en-australie-cooladdi-cherche-preneur_242768" target="_blank" rel="noopener">Une ville pour 240 000 euros ? En Australie, Cooladdi cherche preneur</a>
+      <div class="news-resume">Dans la bourgade de Cooladdi, une des plus petites communes d’Australie, à neuf heures de route de Brisbane, un bâtiment fait office de poste, de restaurant, de pub et d’épicerie. Au début d’avril, Ca…</div>
+      <div class="news-date">19 Apr, 10:29</div>
+    </div></div><button class="btn-more" onclick="afficherPlus('courrier_international')">▼ Afficher plus (14)</button>
+          </div>
+        </div>
+    </div>
+  </main>
+  <script>
+    function toggleMode() {
+      const body = document.body;
+      const btn  = document.getElementById("toggleMode");
+      if (body.classList.contains("dark")) {
+        body.classList.replace("dark", "light");
+        btn.textContent = "🌙 Mode sombre";
+      } else {
+        body.classList.replace("light", "dark");
+        btn.textContent = "☀️ Mode clair";
+      }
+    }
+    function afficherPlus(sourceId) {
+      const more = document.getElementById("more-" + sourceId);
+      const btn  = more.nextElementSibling;
+      if (more.style.display === "none") {
+        more.style.display = "block";
+        btn.textContent = "▲ Afficher moins";
+      } else {
+        more.style.display = "none";
+        btn.textContent = "▼ Afficher plus (" + more.querySelectorAll(".news-item").length + ")";
+      }
+    }
+  </script>
+</body>
+</html>
