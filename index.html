@@ -1,18 +1,384 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Briefing Actus</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News & Actus</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: #0f1117;
+      color: #e8eaf0;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.light { background: #f0f2f7; color: #1a1d2e; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: #1a1d2e;
+      border-bottom: 1px solid #2a2d3e;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    body.light header { background: #ffffff; border-color: #dde2ee; }
+
+    .logo { font-size: 1.2rem; font-weight: 700; color: #3d8ef8; }
+
+    .header-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+    #lastUpdate { font-size: 0.78rem; color: #8892a4; }
+
+    #toggleMode {
+      background: #22263a;
+      color: #e8eaf0;
+      border: 1px solid #2a2d3e;
+      padding: 7px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: all 0.2s;
+    }
+
+    body.light #toggleMode { background: #e8eaf0; color: #1a1d2e; border-color: #dde2ee; }
+    #toggleMode:hover { background: #3d8ef8; color: #fff; }
+
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* CARTE */
+    .card {
+      background: #1a1d2e;
+      border: 1px solid #2a2d3e;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    body.light .card { background: #ffffff; border-color: #dde2ee; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #8892a4;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #2a2d3e;
+    }
+
+    body.light .card h2 { border-color: #dde2ee; }
+
+    /* RÉSUMÉ IA */
+    .resume-ia {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #e8eaf0;
+      min-height: 60px;
+    }
+
+    body.light .resume-ia { color: #1a1d2e; }
+
+    .resume-loading {
+      color: #8892a4;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    .ia-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    /* GRILLE JOURNAUX */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* ARTICLES */
+    .news-list { display: flex; flex-direction: column; }
+
+    .news-item {
+      padding: 12px 0;
+      border-bottom: 1px solid #2a2d3e;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    body.light .news-item { border-color: #dde2ee; }
+    .news-item:first-child { padding-top: 0; }
+    .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .news-titre {
+      font-size: 0.88rem;
+      color: #e8eaf0;
+      line-height: 1.45;
+      font-weight: 600;
+      text-decoration: none;
+      display: block;
+    }
+
+    body.light .news-titre { color: #1a1d2e; }
+    .news-titre:hover { color: #3d8ef8; }
+
+    .news-resume {
+      font-size: 0.80rem;
+      color: #8892a4;
+      line-height: 1.4;
+    }
+
+    body.light .news-resume { color: #5a6478; }
+
+    .news-date {
+      font-size: 0.70rem;
+      color: #5a6478;
+    }
+
+    /* BOUTON AFFICHER PLUS */
+    .btn-more {
+      margin-top: 12px;
+      background: none;
+      border: 1px solid #2a2d3e;
+      color: #3d8ef8;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      width: 100%;
+      transition: all 0.2s;
+    }
+
+    body.light .btn-more { border-color: #dde2ee; }
+    .btn-more:hover { background: #3d8ef8; color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) { .news-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
-<body>
+<body class="dark">
 
-<h1>🗞️ Briefing Actus</h1>
+  <header>
+    <span class="logo">📰 News & Actus</span>
+    <div class="header-right">
+      <span id="lastUpdate">Chargement...</span>
+      <button id="toggleMode" onclick="toggleMode()">☀️ Mode clair</button>
+    </div>
+  </header>
 
-<p style="color: gray; font-size: 0.9em;">
-Dernière mise à jour : 19/04/2026 07:05:47 UTC
-</p>
+  <main>
 
-<h2>🧠 Analyse & contexte</h2>
-<p>L’actualité des dernières 24 heures est marquée par plusieurs thèmes forts, notamment : prix, française, français, grasset, auteurs, trump. Ces sujets reflètent à la fois les tensions internationales, les débats politiques et les dynamiques culturelles du moment.</p>
-<h2>Le Monde</h2><p><a href="https://www.lemonde.fr/international/article/2026/04/19/dans-le-sud-du-liban-une-situation-toujours-plus-volatile-apres-la-mort-d-un-casque-bleu-francais-lors-d-une-attaque-attribuee-au-hezbollah_6681432_3210.html">Dans le sud du Liban, une situation toujours plus instable après la mort d’un casque bleu français lors d’une attaque attribuée au Hezbollah</a></p><p><a href="https://www.lemonde.fr/international/article/2026/04/19/elections-legislatives-en-bulgarie-corruption-et-liens-avec-la-russie-au-c-ur-de-la-campagne_6681393_3210.html">Elections législatives en Bulgarie : corruption et liens avec la Russie au cœur de la campagne</a></p><p><a href="https://www.lemonde.fr/actualite-medias/article/2026/04/19/grasset-vincent-bollore-contre-attaque-dans-le-jdd-et-assure-que-ceux-qui-partent-vont-permettre-a-de-nouveaux-auteurs-d-etre-publies_6681434_3236.html">Grasset : Vincent Bolloré contre-attaque dans le « JDD » après le limogeage d’Olivier Nora et assure que « ceux qui partent vont permettre à de nouveaux auteurs d’être publiés »</a></p><p><a href="https://www.lemonde.fr/un-si-proche-orient/article/2026/04/19/le-desaveu-par-trump-de-la-mediation-d-oman-est-revelateur-de-sa-pulsion-de-guerre-contre-l-iran_6681436_6116995.html">« Le désaveu par Trump de la médiation d’Oman est révélateur de sa pulsion de guerre contre l’Iran »</a></p><p><a href="https://www.lemonde.fr/sciences/article/2026/04/19/frank-merle-laureat-singulier-du-prix-breakthrough_6681186_1650684.html">Le mathématicien Frank Merle, lauréat singulier du Breakthrough, prix créé par  les grandes fortunes de la Silicon Valley</a></p><p><a href="https://www.lemonde.fr/intimites/article/2026/04/19/l-uniforme-a-l-ecole-un-non-debat-pour-les-parents-kenyans_6681390_6190330.html">L’uniforme à l’école, un non-débat pour les parents kényans</a></p><p><a href="https://www.lemonde.fr/politique/article/2026/04/19/carburants-le-gouvernement-appelle-les-distributeurs-a-baisser-les-prix-et-agite-la-menace-d-un-decret-de-plafonnement-des-marges_6681187_823448.html">Carburants : le gouvernement appelle les distributeurs à baisser les prix et agite la menace d’un décret de plafonnement des marges</a></p><p><a href="https://www.lemonde.fr/international/live/2026/04/19/en-direct-guerre-en-ukraine-la-fusillade-et-la-prise-d-otages-survenues-samedi-a-kiev-qualifiees-d-acte-terroriste_6681322_3210.html">EN DIRECT, guerre en Ukraine : la fusillade et la prise d’otages survenues samedi à Kiev qualifiées d’acte terroriste</a></p><p><a href="https://www.lemonde.fr/culture/article/2026/04/18/mort-de-nathalie-baye-emmanuel-macron-salue-une-comedienne-avec-qui-nous-avons-aime-reve-grandi-isabelle-adjani-rend-hommage-a-une-actrice-a-la-spontaneite-eclatante_6681140_3247.html">Mort de Nathalie Baye : Emmanuel Macron salue « une comédienne avec qui nous avons aimé, rêvé, grandi » ; Isabelle Adjani rend hommage à « une actrice à la spontanéité éclatante »</a></p><p><a href="https://www.lemonde.fr/politique/article/2026/04/18/face-au-rn-boris-vallaud-yannick-jadot-et-raphael-glucksmann-appellent-a-construire-un-projet-credible-et-mobilisateur_6681182_823448.html">Face au RN, Boris Vallaud, Yannick Jadot et Raphaël Glucksmann appellent à construire un « projet crédible et mobilisateur »</a></p><p><a href="https://www.lemonde.fr/politique/article/2026/04/19/le-ministre-du-travail-ecarte-l-idee-portee-par-la-cgt-d-instaurer-un-nouveau-jour-ferie-le-8-mars_6681188_823448.html">Le ministre du travail, Jean-Pierre Farandou, écarte l’idée, portée par la CGT, d’instaurer un nouveau jour férié le 8 mars</a></p><p><a href="https://www.lemonde.fr/m-styles/article/2026/04/19/trois-recettes-venues-d-ailleurs-pour-voyager-par-l-assiette_6681323_4497319.html">Trois recettes venues d’ailleurs pour voyager par l’assiette</a></p><p><a href="https://www.lemonde.fr/international/article/2026/04/18/andrei-lankov-l-arsenal-nucleaire-est-percu-par-le-regime-nord-coreen-comme-le-garant-de-sa-survie_6681171_3210.html">Andreï Lankov : « L’arsenal nucléaire est perçu par le régime nord-coréen comme le garant de sa survie »</a></p><p><a href="https://www.lemonde.fr/argent/article/2026/04/19/devenir-proprietaire-le-parcours-de-margaux-et-mylan-pour-denicher-leur-bien-a-nantes_6681437_1657007.html">Devenir propriétaire : le parcours de Margaux et Mylan pour dénicher leur bien à Nantes</a></p><p><a href="https://www.lemonde.fr/international/article/2026/04/19/face-a-la-situation-dramatique-a-cuba-l-espagne-le-mexique-et-le-bresil-demandent-un-dialogue-respectueux-avec-la-havane_6681255_3210.html">Face « à la situation dramatique » à Cuba, l’Espagne, le Mexique et le Brésil demandent un dialogue « respectueux » avec La Havane</a></p><p><a href="https://www.lemonde.fr/sport/article/2026/04/19/mondial-2027-de-football-l-equipe-de-france-feminine-accrochee-par-les-pays-bas-la-qualification-directe-s-eloigne_6681184_3242.html">Mondial 2027 de football : l’équipe de France féminine accrochée par les Pays-Bas, la qualification directe s’éloigne</a></p><h2>Sud Ouest</h2><p><a href="https://www.sudouest.fr/economie/vincent-bollore/vincent-bollore-denonce-une-petite-caste-qui-se-croit-au-dessus-de-tout-et-assure-que-grasset-continuera-avec-de-nouveaux-auteurs-28746279.php">Vincent Bolloré dénonce « une petite caste qui se croit au-dessus de tout » et assure que Grasset continuera avec de nouveaux auteurs</a></p><p><a href="https://www.sudouest.fr/international/asie/coree-du-nord/la-coree-du-nord-procede-a-de-nouveaux-tirs-de-missiles-balistiques-une-augmentation-tres-inquietante-pour-l-aiea-28746216.php">La Corée du Nord procède à de nouveaux tirs de missiles balistiques, une « augmentation très inquiétante » pour l’AIEA</a></p><p><a href="https://www.sudouest.fr/sciences-et-technologie/espace/espace-blue-origin-rivale-de-spacex-tente-un-troisieme-lancement-de-sa-fusee-new-glenn-28746168.php">Espace : Blue Origin, rivale de SpaceX, tente un troisième lancement de sa fusée New Glenn</a></p><p><a href="https://www.sudouest.fr/international/crise-politique-en-bulgarie-les-electeurs-aux-urnes-pour-un-huitieme-scrutin-en-cinq-ans-28746116.php">Crise politique en Bulgarie : les électeurs aux urnes pour un huitième scrutin en cinq ans</a></p><p><a href="https://www.sudouest.fr/international/moyen-orient/guerre-au-moyen-orient-l-iran-verrouille-a-nouveau-le-detroit-d-ormuz-des-navires-commerciaux-vises-par-des-tirs-28746073.php">Guerre au Moyen-Orient : l’Iran verrouille à nouveau le détroit d'Ormuz, des navires commerciaux visés par des tirs</a></p><p><a href="https://www.sudouest.fr/politique/opinions/la-chronique-de-michel-winock-profession-de-foi-28704281.php">La chronique de Michel Winock : Profession de foi</a></p><p><a href="https://www.sudouest.fr/politique/interview-thomas-cazenave-olivier-falorni-maires-de-bordeaux-et-la-rochelle-on-n-est-pas-a-portee-de-baffes-28718870.php">INTERVIEW. Thomas Cazenave, Olivier Falorni, maires de Bordeaux et La Rochelle : « On n’est pas à portée de baffes »</a></p><p><a href="https://www.sudouest.fr/sante/bien-etre/bien-bouger/au-quotidien-plus-que-du-sport-de-l-activite-physique-28638056.php">Au quotidien, plus que du sport : de l’activité physique</a></p><p><a href="https://www.sudouest.fr/archives/jouez-avec-l-oeil-des-archives-devinez-la-legende-de-nos-photos-28710407.php">Jouez avec l’Œil des archives : devinez la légende de nos photos !</a></p><p><a href="https://www.sudouest.fr/redaction/ephemeride/video-souvenez-vous-en-1987-la-famille-simpson-fait-sa-premiere-apparition-a-la-television-28608204.php">Vidéo. Souvenez-vous, en 1987, la famille Simpson fait sa première apparition à la télévision</a></p><p><a href="https://www.sudouest.fr/international/venezuela/trinite-et-tobago-decouverte-des-corps-de-50-bebes-et-6-adultes-dans-un-cimetiere-28743878.php">Trinité-et-Tobago : découverte des corps de 50 bébés et 6 adultes dans un cimetière</a></p><p><a href="https://www.sudouest.fr/economie/social/le-ministre-du-travail-ecarte-l-idee-d-un-8-mars-ferie-pour-la-journee-internationale-des-droits-des-femmes-28743750.php">Le ministre du Travail écarte l’idée d’un 8 mars férié pour la journée internationale des droits des femmes</a></p><p><a href="https://www.sudouest.fr/economie/energie/carburants/carburant-le-gouvernement-appelle-les-distributeurs-a-baisser-les-prix-28743424.php">Carburant : le gouvernement appelle les distributeurs à baisser les prix</a></p><p><a href="https://www.sudouest.fr/economie/rappel-conso/autriche-rappel-de-petits-pots-pour-bebes-potentiellement-contamines-par-de-la-mort-aux-rats-28743406.php">Autriche : rappel de petits pots pour bébés potentiellement contaminés par de la mort-aux-rats</a></p><p><a href="https://www.sudouest.fr/culture/litterature/grasset-slimani-despentes-carrere-300-auteurs-appellent-a-la-creation-d-une-clause-de-conscience-dans-l-edition-28743347.php">Grasset : Slimani, Despentes, Carrère… 300 auteurs appellent à la création d’une « clause de conscience » dans l’édition</a></p><p><a href="https://www.sudouest.fr/international/moyen-orient/liban/soldat-francais-tue-au-liban-qui-etait-florian-montorio-un-habitue-des-operations-exterieures-28743274.php">Soldat français tué au Liban : qui était Florian Montorio, un habitué des opérations extérieures ?</a></p><p><a href="https://www.sudouest.fr/elections/presidentielle/2027-un-president-de-47-ans-issu-du-monde-politique-plaident-les-francais-selon-un-sondage-28743071.php">2027: un président de 47 ans, issu du monde politique, plaident les Français, selon un sondage</a></p><p><a href="https://www.sudouest.fr/international/etats-unis/donald-trump/venezuela-maria-corina-machado-ne-regrette-pas-d-avoir-donne-son-prix-nobel-a-donald-trump-28742871.php">Venezuela : María Corina Machado « ne regrette pas » d’avoir donné son prix Nobel à Donald Trump</a></p><p><a href="https://www.sudouest.fr/international/mexique-un-des-narcotrafiquants-les-plus-recherches-d-europe-arrete-a-cancun-28742542.php">Mexique : un des narcotrafiquants les plus recherchés d’Europe arrêté à Cancún</a></p><p><a href="https://www.sudouest.fr/justice/cybercriminalite-elon-musk-convoque-lundi-devant-la-justice-francaise-28742413.php">Cybercriminalité : Elon Musk convoqué lundi devant la justice française</a></p><h2>Courrier International</h2><p><a href="https://www.courrierinternational.com/article/vu-du-royaume-uni-l-autoroute-francaise-une-vaste-galerie-d-art-a-ciel-ouvert_242526">L’autoroute française, une “vaste galerie d’art à ciel ouvert”</a></p><p><a href="https://www.courrierinternational.com/article/sacres-francais-levez-le-rideau-ici-valsent-les-pretendants-a-la-presidence-francaise_243096">Levez le rideau ! Ici valsent les prétendants à la présidence française</a></p><p><a href="https://www.courrierinternational.com/article/gauche-a-barcelone-le-super-heros-pedro-sanchez-a-accueilli-les-progressistes-du-monde-entier_243110">À Barcelone, le “super-héros” Pedro Sánchez a accueilli les progressistes du monde entier</a></p><p><a href="https://www.courrierinternational.com/article/pendant-que-vous-dormiez-ukraine-detroit-d-ormuz-donald-trump-et-elon-musk-les-informations-de-la-nuit_243111">Ukraine, détroit d’Ormuz, Donald Trump et Elon Musk : les informations de la nuit</a></p><p><a href="https://www.courrierinternational.com/article/hommage-bye-nathalie-la-presse-internationale-salue-l-actrice-francaise-disparue_243112">“Bye Nathalie”, la presse internationale salue l’actrice française disparue</a></p><p><a href="https://www.courrierinternational.com/long-format/reportage-irlande-du-nord-gerry-adams-et-l-ira-une-page-d-histoire-obscure_242463">Irlande du Nord : Gerry Adams et l’IRA, une page d’histoire obscure</a></p><p><a href="https://www.courrierinternational.com/article/vu-de-l-etranger-ni-droite-ni-gauche-ni-extremes-la-carte-politique-francaise-est-un-casse-tete_242689">Ni droite, ni gauche, ni extrêmes ? La carte politique française est un casse-tête</a></p><p><a href="https://www.courrierinternational.com/article/analyse-le-pape-leon-xiv-un-adversaire-redoutable-pour-donald-trump_242960">Le pape Léon XIV, un adversaire redoutable pour Donald Trump</a></p><p><a href="https://www.courrierinternational.com/article/modern-love-puis-je-finir-ma-vie-avec-toi_242607">Puis-je finir ma vie avec toi ?</a></p><p><a href="https://www.courrierinternational.com/article/vu-de-chine-la-plupart-du-temps-moscou-mene-pekin-par-le-bout-du-nez_240033">La plupart du temps, Moscou mène Pékin par le bout du nez</a></p><p><a href="https://www.courrierinternational.com/article/conflit-un-soldat-francais-tue-au-liban-ou-la-treve-tient-difficilement_243109">Un soldat français tué au Liban, où la trêve tient difficilement</a></p><p><a href="https://www.courrierinternational.com/article/economie-oui-les-entreprises-font-expres-de-vous-rendre-chevre-pour-que-vous-renonciez-a-votre-du_243010">Oui, les entreprises font exprès de vous rendre chèvre pour que vous renonciez à votre dû</a></p><p><a href="https://www.courrierinternational.com/article/temoignage-comment-j-ai-achete-un-chateau-en-dordogne-pour-le-prix-d-un-studio-a-sydney_242864">Comment j’ai acheté un château en Dordogne pour le prix d’un studio à Sydney</a></p><p><a href="https://www.courrierinternational.com/article/vu-du-royaume-uni-nous-avons-trouve-notre-village-ces-parents-qui-partent-elever-leurs-enfants-ailleurs_242373">“Nous avons trouvé notre village” : ces parents qui partent élever leurs enfants ailleurs</a></p><p><a href="https://www.courrierinternational.com/stories/musique-angine-de-poitrine-le-phenomene-quebecois-trop-etrange-pour-etre-de-l-ia_242832">Angine de Poitrine, le phénomène québécois trop étrange pour être de l’IA</a></p><p><a href="https://www.courrierinternational.com/article/conflit-ferme-ouvert-ferme-24-heures-de-chaos-autour-du-detroit-d-ormuz_243108">“Fermé”, “ouvert”, “fermé” : 24 heures de chaos autour du détroit d’Ormuz</a></p><p><a href="https://www.courrierinternational.com/article/extreme-droite-patrons-chez-nous-a-milan-le-sommet-des-patriotes-reunit-salvini-et-bardella_243107">“Patrons chez nous” : un sommet d’extrême droite réunit Salvini et Bardella à Milan</a></p><p><a href="https://www.courrierinternational.com/article/sport-comment-la-ville-de-sheffield-a-garde-son-titre-de-capitale-du-snooker_242911">Comment la ville de Sheffield a gardé son titre de capitale du snooker</a></p><p><a href="https://www.courrierinternational.com/grand-format/infographie-le-porc-espagnol-une-filiere-de-poids-qui-redoute-le-pire_242656">Le porc espagnol, une filière de poids qui redoute le pire</a></p><p><a href="https://www.courrierinternational.com/article/vu-de-suisse-grasset-seul-sans-auteurs-adieu-le-pluralisme_243054">Grasset seul sans auteurs : adieu le pluralisme ?</a></p></body></html>
+    <!-- RÉSUMÉ IA -->
+    <div class="card">
+      <h2>🤖 Résumé de l'actualité</h2>
+      <div class="ia-badge">✨ Généré par IA</div>
+      <div class="resume-ia" id="resumeIA">
+        <span class="resume-loading">Analyse de l'actualité en cours...</span>
+      </div>
+    </div>
+
+    <!-- JOURNAUX -->
+    <div class="news-grid">
+      <div class="card">
+        <h2>🔵 Le Monde</h2>
+        <div class="news-list" id="newsMonde">Chargement...</div>
+      </div>
+      <div class="card">
+        <h2>🟠 Sud Ouest</h2>
+        <div class="news-list" id="newsSudOuest">Chargement...</div>
+      </div>
+      <div class="card">
+        <h2>🟢 Courrier International</h2>
+        <div class="news-list" id="newsCourrier">Chargement...</div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const RSS_PROXY   = "https://api.rss2json.com/v1/api.json?rss_url=";
+    const GEMINI_API  = "https://news-api-two-drab.vercel.app/api/gemini";
+    const ACTUALISATION = 6 * 60 * 60 * 1000; // 6 heures
+
+    const SOURCES = {
+      monde:    { url: "https://www.lemonde.fr/rss/une.xml",                    id: "newsMonde"    },
+      sudouest: { url: "https://www.sudouest.fr/rss.xml",                       id: "newsSudOuest" },
+      courrier: { url: "https://www.courrierinternational.com/feed/all/rss.xml", id: "newsCourrier" }
+    };
+
+    let tousLesArticles = [];
+
+    // ============================================================
+    // INITIALISATION
+    // ============================================================
+    document.addEventListener("DOMContentLoaded", async () => {
+      await chargerTout();
+      setInterval(chargerTout, ACTUALISATION);
+    });
+
+    async function chargerTout() {
+      tousLesArticles = [];
+      await Promise.all(Object.values(SOURCES).map(s => chargerFlux(s)));
+      await genererResumeIA();
+      const now = new Date();
+      document.getElementById("lastUpdate").textContent =
+        "Mise à jour : " + now.toLocaleTimeString("fr-FR");
+    }
+
+    // ============================================================
+    // FLUX RSS
+    // ============================================================
+    async function chargerFlux(source) {
+      const conteneur = document.getElementById(source.id);
+      try {
+        const resp = await fetch(RSS_PROXY + encodeURIComponent(source.url));
+        const data = await resp.json();
+
+        if (!data.items || !data.items.length) {
+          conteneur.innerHTML = "<p style='color:#8892a4;font-size:0.85rem'>Aucun article disponible.</p>";
+          return;
+        }
+
+        const articles = data.items.map(item => ({
+          titre:   item.title,
+          lien:    item.link,
+          resume:  item.description ? nettoyer(item.description) : "",
+          date:    item.pubDate
+        }));
+
+        // Collecter les titres pour le résumé IA
+        articles.slice(0, 10).forEach(a => tousLesArticles.push(a.titre));
+
+        afficherArticles(conteneur, articles, source.id);
+      } catch (e) {
+        conteneur.innerHTML = "<p style='color:#8892a4;font-size:0.85rem'>Erreur de chargement.</p>";
+      }
+    }
+
+    function nettoyer(html) {
+      const div = document.createElement("div");
+      div.innerHTML = html;
+      const texte = div.textContent || div.innerText || "";
+      return texte.trim().slice(0, 180) + (texte.length > 180 ? "…" : "");
+    }
+
+    function afficherArticles(conteneur, articles, sourceId) {
+      const visibles = articles.slice(0, 5);
+      const cachees  = articles.slice(5);
+
+      const htmlVisibles = visibles.map(a => renderArticle(a)).join("");
+      const htmlCachees  = cachees.length > 0
+        ? `<div id="more-${sourceId}" style="display:none">
+             ${cachees.map(a => renderArticle(a)).join("")}
+           </div>
+           <button class="btn-more" onclick="afficherPlus('${sourceId}')">
+             ▼ Afficher plus (${cachees.length})
+           </button>`
+        : "";
+
+      conteneur.innerHTML = htmlVisibles + htmlCachees;
+    }
+
+    function renderArticle(a) {
+      return `
+        <div class="news-item">
+          <a class="news-titre" href="${a.lien}" target="_blank" rel="noopener">${a.titre}</a>
+          ${a.resume ? `<div class="news-resume">${a.resume}</div>` : ""}
+          <div class="news-date">${formaterDate(a.date)}</div>
+        </div>`;
+    }
+
+    function afficherPlus(sourceId) {
+      const more = document.getElementById("more-" + sourceId);
+      const btn  = more.nextElementSibling;
+      if (more.style.display === "none") {
+        more.style.display = "block";
+        btn.textContent = "▲ Afficher moins";
+      } else {
+        more.style.display = "none";
+        btn.textContent = `▼ Afficher plus (${more.querySelectorAll(".news-item").length})`;
+      }
+    }
+
+    function formaterDate(dateStr) {
+      try {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+      } catch { return ""; }
+    }
+
+    // ============================================================
+    // RÉSUMÉ IA
+    // ============================================================
+    async function genererResumeIA() {
+      const el = document.getElementById("resumeIA");
+      if (!tousLesArticles.length) {
+        el.innerHTML = "<span class='resume-loading'>Aucun titre disponible pour générer un résumé.</span>";
+        return;
+      }
+
+      try {
+        const resp = await fetch(GEMINI_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ titres: tousLesArticles.slice(0, 20) })
+        });
+
+        const data = await resp.json();
+        if (data.resume) {
+          el.textContent = data.resume;
+        } else {
+          el.innerHTML = "<span class='resume-loading'>Résumé temporairement indisponible.</span>";
+        }
+      } catch (e) {
+        el.innerHTML = "<span class='resume-loading'>Résumé temporairement indisponible.</span>";
+      }
+    }
+
+    // ============================================================
+    // MODE CLAIR / SOMBRE
+    // ============================================================
+    function toggleMode() {
+      const body = document.body;
+      const btn  = document.getElementById("toggleMode");
+      if (body.classList.contains("dark")) {
+        body.classList.replace("dark", "light");
+        btn.textContent = "🌙 Mode sombre";
+      } else {
+        body.classList.replace("light", "dark");
+        btn.textContent = "☀️ Mode clair";
+      }
+    }
+  </script>
+
+</body>
+</html>
