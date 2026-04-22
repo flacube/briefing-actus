@@ -17,14 +17,11 @@
     body.light #toggleMode { background: #e8eaf0; color: #1a1d2e; border-color: #dde2ee; }
     #toggleMode:hover { background: #3d8ef8; color: #fff; }
     main { max-width: 1400px; margin: 0 auto; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px; }
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .card { background: #1a1d2e; border: 1px solid #2a2d3e; border-radius: 14px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
     body.light .card { background: #ffffff; border-color: #dde2ee; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
     .card h2 { font-size: 1rem; font-weight: 600; color: #8892a4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #2a2d3e; }
     body.light .card h2 { border-color: #dde2ee; }
-    .resume-ia { font-size: 0.95rem; line-height: 1.7; color: #e8eaf0; }
-    body.light .resume-ia { color: #1a1d2e; }
-    .ia-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
-    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .news-list { display: flex; flex-direction: column; }
     .news-item { padding: 12px 0; border-bottom: 1px solid #2a2d3e; display: flex; flex-direction: column; gap: 5px; }
     body.light .news-item { border-color: #dde2ee; }
@@ -46,16 +43,11 @@
   <header>
     <span class="logo">📰 News & Actus</span>
     <div class="header-right">
-      <span id="lastUpdate">Mise à jour : 22/04/2026 10:10:56 UTC</span>
+      <span id="lastUpdate">Mise à jour : 22/04/2026 10:23:16 UTC</span>
       <button id="toggleMode" onclick="toggleMode()">☀️ Mode clair</button>
     </div>
   </header>
   <main>
-    <div class="card">
-      <h2>🤖 Résumé de l'actualité</h2>
-      <div class="ia-badge">✨ Généré par IA</div>
-      <div class="resume-ia">L'actualité des dernières 24 heures est marquée par plusieurs thèmes, notamment : guerre, trump, france, prix, fait. Ces sujets reflètent les tensions internationales et les débats du moment.</div>
-    </div>
     <div class="news-grid">
       
         <div class="card">
@@ -63,9 +55,9 @@
           <div class="news-list" id="le_monde">
             
     <div class="news-item">
-      <a class="news-titre" href="https://www.lemonde.fr/international/article/2026/04/22/le-liban-affiche-sa-proximite-avec-la-france-avant-les-negociations-avec-israel_6682351_3210.html" target="_blank" rel="noopener">Le Liban affiche sa proximité avec la France avant les négociations avec Israël</a>
-      <div class="news-resume">Le premier ministre, Nawaf Salam, a rendu visite à Emmanuel Macron, mardi 21 avril, quarante-huit heures avant les pourparlers prévus à Washington. Une manière de sortir son pays de l’isolement diplom…</div>
-      <div class="news-date">22 Apr, 06:32</div>
+      <a class="news-titre" href="https://www.lemonde.fr/international/article/2026/04/22/pour-l-iran-un-statu-quo-inconfortable-entre-cessez-le-feu-et-blocus_6682381_3210.html" target="_blank" rel="noopener">Pour l’Iran, un statu quo inconfortable, entre cessez-le-feu et blocus</a>
+      <div class="news-resume">La prolongation de la trêve annoncée par le président américain, mardi, place Téhéran, étranglé économiquement, dans une situation difficile à tenir dans la durée. Le risque d’une nouvelle escalade de…</div>
+      <div class="news-date">22 Apr, 12:00</div>
     </div>
     <div class="news-item">
       <a class="news-titre" href="https://www.lemonde.fr/societe/article/2026/04/22/nicolas-sarkozy-et-le-mystere-de-l-argent-libyen-retour-sur-un-marathon-judiciaire_6682301_3224.html" target="_blank" rel="noopener">Nicolas Sarkozy et le mystère de l’argent libyen : comprendre les incertitudes et les rebondissements d’un marathon judiciaire</a>
@@ -78,24 +70,29 @@
       <div class="news-date">22 Apr, 11:11</div>
     </div>
     <div class="news-item">
-      <a class="news-titre" href="https://www.lemonde.fr/economie/article/2026/04/22/les-voitures-electriques-viennent-titiller-les-hybrides-dans-la-bataille-de-la-grande-autonomie_6682342_3234.html" target="_blank" rel="noopener">Les voitures électriques viennent titiller les hybrides dans la bataille des très longs trajets</a>
-      <div class="news-resume">La demande de pouvoir rouler très longtemps sans avoir à recharger les batteries reste forte chez de nombreux acheteurs de modèles. L’industrie tente d’y répondre, avec des autonomies qui dépassent 75…</div>
-      <div class="news-date">22 Apr, 06:00</div>
+      <a class="news-titre" href="https://www.lemonde.fr/economie/article/2026/04/22/apres-le-coup-de-force-de-bollore-les-librairies-sont-desormais-des-vigies_6682358_3234.html" target="_blank" rel="noopener">Après le coup de force de Vincent Bolloré à Grasset, « les librairies sont désormais des vigies »</a>
+      <div class="news-resume">Christian Thorel, figure de la librairie indépendante, a été l’un des premiers à alerter sur la mainmise idéologique de Vincent Bolloré sur le secteur de l’édition, dès le rachat d’Hachette en 2023.</div>
+      <div class="news-date">22 Apr, 08:38</div>
     </div>
-    <div class="news-item">
-      <a class="news-titre" href="https://www.lemonde.fr/economie/article/2026/04/22/le-livret-a-poursuit-sa-chute-en-mars-avec-490-millions-d-euros-en-moins-deposes_6682373_3234.html" target="_blank" rel="noopener">Le Livret A poursuit sa chute en mars, avec 490 millions d’euros en moins déposés</a>
-      <div class="news-resume">S’il a diminué de 3,1 milliards d’euros depuis le début de l’année, le stock d’argent déposé sur les quelque 58 millions de Livrets A reste cependant important, à 446,5 milliards d’euros.</div>
-      <div class="news-date">22 Apr, 10:55</div>
-    </div><div id="more-le_monde" style="display:none">
     <div class="news-item">
       <a class="news-titre" href="https://www.lemonde.fr/societe/article/2026/04/22/drogues-de-synthese-crees-dans-un-but-de-prevention-de-faux-sites-de-vente-en-ligne-generent-16-millions-d-euros-d-intentions-d-achat_6682364_3224.html" target="_blank" rel="noopener">Drogues de synthèse : le bilan étonnant des faux sites de vente en ligne, créés dans un but de prévention</a>
       <div class="news-resume">Conçus par l’association PlaySafe, ces pseudo-sites alertent sur les risques associés aux nouveaux produits de synthèse et sur la banalisation du recours à l’achat de stupéfiants en ligne.</div>
       <div class="news-date">22 Apr, 10:00</div>
+    </div><div id="more-le_monde" style="display:none">
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/culture/article/2026/04/22/dans-la-comedie-romantique-la-poupee-une-love-doll-ouvre-les-yeux-et-decouvre-le-couple-hetero_6682382_3246.html" target="_blank" rel="noopener">Dans « La Poupée », une « love doll » ouvre les yeux et découvre le couple hétéro</a>
+      <div class="news-resume">La jeune Zoé Marchal détonne dans le rôle d’Audrey, objet sexuel en silicone acheté par Rémi, un quinquagénaire interprété par Vincent Macaigne.</div>
+      <div class="news-date">22 Apr, 12:00</div>
     </div>
     <div class="news-item">
-      <a class="news-titre" href="https://www.lemonde.fr/politique/article/2026/04/21/carburants-lecornu-va-aider-les-grands-rouleurs-aux-revenus-tres-modestes_6682044_823448.html" target="_blank" rel="noopener">Prix des carburants : pour aider les « grands rouleurs » aux revenus modestes, Sébastien Lecornu élargit les aides</a>
-      <div class="news-resume">Le coût du dispositif passe de 70 millions à 180 millions d’euros par mois, malgré des marges de manœuvre budgétaires réduites.</div>
-      <div class="news-date">21 Apr, 19:05</div>
+      <a class="news-titre" href="https://www.lemonde.fr/economie/article/2026/04/22/le-livret-a-poursuit-sa-chute-en-mars-avec-490-millions-d-euros-en-moins-deposes_6682373_3234.html" target="_blank" rel="noopener">Le Livret A poursuit sa chute en mars, avec 490 millions d’euros de retraits nets</a>
+      <div class="news-resume">S’il a diminué de 3,1 milliards d’euros depuis le début de l’année, le stock d’argent déposé sur les quelque 58 millions de Livrets A reste cependant important, à 446,5 milliards d’euros.</div>
+      <div class="news-date">22 Apr, 10:55</div>
+    </div>
+    <div class="news-item">
+      <a class="news-titre" href="https://www.lemonde.fr/economie/article/2026/04/22/les-voitures-electriques-viennent-titiller-les-hybrides-dans-la-bataille-de-la-grande-autonomie_6682342_3234.html" target="_blank" rel="noopener">Les voitures électriques viennent titiller les hybrides dans la bataille des très longs trajets</a>
+      <div class="news-resume">La demande de pouvoir rouler très longtemps sans avoir à recharger les batteries reste forte chez de nombreux acheteurs de modèles. L’industrie tente d’y répondre, avec des autonomies qui dépassent 75…</div>
+      <div class="news-date">22 Apr, 06:00</div>
     </div>
     <div class="news-item">
       <a class="news-titre" href="https://www.lemonde.fr/sante/article/2026/04/22/reduire-l-usage-des-cosmetiques-diminue-rapidement-l-exposition-aux-perturbateurs-endocriniens-selon-une-etude-de-l-inserm_6682380_1651302.html" target="_blank" rel="noopener">Réduire l’usage des cosmétiques diminue rapidement l’exposition aux perturbateurs endocriniens, selon une étude de l’Inserm</a>
@@ -103,19 +100,14 @@
       <div class="news-date">22 Apr, 11:55</div>
     </div>
     <div class="news-item">
-      <a class="news-titre" href="https://www.lemonde.fr/culture/article/2026/04/22/les-fleurs-du-manguier-le-perilleux-periple-de-deux-enfants-rohingya_6682376_3246.html" target="_blank" rel="noopener">« Les Fleurs du manguier » : le périlleux périple de deux enfants rohingya</a>
-      <div class="news-resume">Pour son film sur le sort de la minorité musulmane birmane, le Japonais Akio Fujimoto a effectué plusieurs années préalables de travail de terrain.</div>
-      <div class="news-date">22 Apr, 11:30</div>
-    </div>
-    <div class="news-item">
       <a class="news-titre" href="https://www.lemonde.fr/pixels/article/2026/04/22/spacex-mise-sur-l-ia-et-noue-un-partenariat-avec-l-editeur-de-code-cursor_6682368_4408996.html" target="_blank" rel="noopener">SpaceX mise sur l’IA et noue un partenariat avec l’éditeur de code Cursor</a>
       <div class="news-resume">Le partenariat est assorti d’une option de rachat à 60 milliards de dollars d’ici à la fin de l’année. Ce partenariat avec Cursor a lieu alors qu’une course est engagée dans la Silicon Valley pour cap…</div>
       <div class="news-date">22 Apr, 10:14</div>
     </div>
     <div class="news-item">
-      <a class="news-titre" href="https://www.lemonde.fr/international/article/2026/04/22/la-chine-felicite-les-pays-africains-ayant-bloque-le-survol-de-l-avion-du-president-taiwanais-lai-ching-te-taipei-denonce-des-pressions_6682378_3210.html" target="_blank" rel="noopener">La Chine félicite les pays africains ayant bloqué le survol de l’avion du président taïwanais, Lai Ching-te ; Taipei dénonce des « pressions »</a>
-      <div class="news-resume">Sous la pression de Pékin, les Seychelles, Maurice et Madagascar ont fermé leur espace aérien à l’avion de M. Lai, illustrant l’isolement croissant de Taipei et l’influence de la Chine sur le continen…</div>
-      <div class="news-date">22 Apr, 11:33</div>
+      <a class="news-titre" href="https://www.lemonde.fr/idees/article/2026/04/22/les-jeunes-issus-de-familles-pauvres-doivent-soutenir-leurs-parents-mais-cela-se-fait-au-prix-de-leur-propre-emancipation_6682366_3232.html" target="_blank" rel="noopener">« Les jeunes issus de familles pauvres doivent soutenir leurs parents, mais cela se fait au prix de leur propre émancipation »</a>
+      <div class="news-resume">Dans une tribune au « Monde », le collectif Il faut bien que jeunesse se fâche, soutenu par plus d’une trentaine d’autres organisations, syndicats et associations, demande la modification des règles d…</div>
+      <div class="news-date">22 Apr, 10:00</div>
     </div>
     <div class="news-item">
       <a class="news-titre" href="https://www.lemonde.fr/planete/article/2026/04/22/les-effets-du-rechauffement-climatique-sur-la-sante-en-europe-de-plus-en-plus-marques_6682346_3244.html" target="_blank" rel="noopener">Les effets du réchauffement climatique sur la santé en Europe de plus en plus marqués</a>
@@ -123,9 +115,9 @@
       <div class="news-date">22 Apr, 06:00</div>
     </div>
     <div class="news-item">
-      <a class="news-titre" href="https://www.lemonde.fr/idees/article/2026/04/22/les-jeunes-issus-de-familles-pauvres-doivent-soutenir-leurs-parents-mais-cela-se-fait-au-prix-de-leur-propre-emancipation_6682366_3232.html" target="_blank" rel="noopener">« Les jeunes issus de familles pauvres doivent soutenir leurs parents, mais cela se fait au prix de leur propre émancipation »</a>
-      <div class="news-resume">Dans une tribune au « Monde », le collectif Il faut bien que jeunesse se fâche, soutenu par plus d’une trentaine d’autres organisations, syndicats et associations, demande la modification des règles d…</div>
-      <div class="news-date">22 Apr, 10:00</div>
+      <a class="news-titre" href="https://www.lemonde.fr/international/article/2026/04/22/la-chine-felicite-les-pays-africains-ayant-bloque-le-survol-de-l-avion-du-president-taiwanais-lai-ching-te-taipei-denonce-des-pressions_6682378_3210.html" target="_blank" rel="noopener">La Chine félicite les pays africains ayant bloqué le survol de l’avion du président taïwanais, Lai Ching-te ; Taipei dénonce des « pressions »</a>
+      <div class="news-resume">Sous la pression de Pékin, les Seychelles, Maurice et Madagascar ont fermé leur espace aérien à l’avion de M. Lai, illustrant l’isolement croissant de Taipei et l’influence de la Chine sur le continen…</div>
+      <div class="news-date">22 Apr, 11:33</div>
     </div>
     <div class="news-item">
       <a class="news-titre" href="https://www.lemonde.fr/sciences/article/2026/04/22/la-nasa-devoile-son-nouveau-telescope-spatial-roman-qui-realisera-un-atlas-de-l-univers_6682355_1650684.html" target="_blank" rel="noopener">La NASA dévoile son nouveau télescope spatial Roman, qui réalisera un « atlas de l’Univers »</a>
@@ -260,6 +252,11 @@
           <div class="news-list" id="courrier_international">
             
     <div class="news-item">
+      <a class="news-titre" href="https://www.courrierinternational.com/article/football-pas-de-tailgating-aux-etats-unis-pendant-la-coupe-du-monde-quel-dommage_243201" target="_blank" rel="noopener">Pas de “tailgating” aux États-Unis pendant la Coupe du monde ? Quel dommage !</a>
+      <div class="news-resume">Malgré un démenti ambigu de la Fifa, la presse étrangère craint que les “tailgate parties”, pique-niques organisés sur les parkings avant les rencontres sportives, soient rendues impossibles lors du M…</div>
+      <div class="news-date">22 Apr, 12:05</div>
+    </div>
+    <div class="news-item">
       <a class="news-titre" href="https://www.courrierinternational.com/article/economie-et-maintenant-une-flambee-des-prix-des-preservatifs_243226" target="_blank" rel="noopener">Et maintenant, une flambée des prix des préservatifs</a>
       <div class="news-resume">Le PDG de Karex, qui fabrique un cinquième des préservatifs commercialisés dans le monde, a annoncé devoir bientôt augmenter les tarifs de ses produits. En cause, la flambée des prix de certains compo…</div>
       <div class="news-date">22 Apr, 11:53</div>
@@ -278,12 +275,12 @@
       <a class="news-titre" href="https://www.courrierinternational.com/article/criminalite-a-mexico-l-assassinat-d-une-jeune-femme-expose-les-failles-de-la-justice_243208" target="_blank" rel="noopener">À Mexico, l’assassinat d’une jeune femme expose les failles de la justice</a>
       <div class="news-resume">Edith Guadalupe Valdés, 21 ans, a été retrouvée morte le 17 avril dans un immeuble de Mexico où elle devait passer un entretien d’embauche. Alors que les soupçons se tournent vers un agent de sécurité…</div>
       <div class="news-date">22 Apr, 10:44</div>
-    </div>
+    </div><div id="more-courrier_international" style="display:none">
     <div class="news-item">
       <a class="news-titre" href="https://www.courrierinternational.com/article/dans-nos-archives-tchernobyl-quarante-ans-apres-quatre-articles-sur-la-catastrophe-nucleaire_243156" target="_blank" rel="noopener">Tchernobyl, quarante ans après : quatre articles sur la catastrophe nucléaire</a>
       <div class="news-resume">Le 26 avril 1986 reste dans les mémoires comme le jour du plus grave accident nucléaire de l’histoire. Quarante ans après la catastrophe de Tchernobyl, alors que la guerre fait rage en Ukraine, en Ira…</div>
       <div class="news-date">22 Apr, 10:22</div>
-    </div><div id="more-courrier_international" style="display:none">
+    </div>
     <div class="news-item">
       <a class="news-titre" href="https://www.courrierinternational.com/article/a-la-une-du-magazine-intelligence-artificielle-seront-nous-vraiment-tous-remplaces-au-travail_243213" target="_blank" rel="noopener">Intelligence artificielle : seront-nous vraiment tous remplacés au travail ?</a>
       <div class="news-resume">Chaque semaine, “Courrier international” explique ses choix éditoriaux. Dans ce numéro, nous revenons sur les inquiétudes, légitimes, des travailleurs partout dans le monde face à l’essor de l’IA. Cet…</div>
@@ -353,11 +350,6 @@
       <a class="news-titre" href="https://www.courrierinternational.com/article/revelations-la-russie-continue-de-fabriquer-des-armes-chimiques-en-secret-revele-une-enquete_243188" target="_blank" rel="noopener">La Russie continue de fabriquer des armes chimiques en secret, révèle une enquête</a>
       <div class="news-resume">Dans une enquête vidéo, “Proekt” démonte l’architecture opaque des laboratoires liés aux armes chimiques en Russie, qui opèrent sous le couvert d’instituts aux missions officiellement civiles. Le médi…</div>
       <div class="news-date">21 Apr, 17:42</div>
-    </div>
-    <div class="news-item">
-      <a class="news-titre" href="https://www.courrierinternational.com/article/economie-la-chine-se-tourne-en-urgence-vers-l-afrique-du-nord-pour-garantir-sa-securite-energetique_243175" target="_blank" rel="noopener">La Chine se tourne “en urgence” vers l’Afrique du Nord pour garantir sa sécurité énergétique</a>
-      <div class="news-resume">Face aux perturbations actuelles dans les pays du Golfe, la Chine réoriente vers l’Afrique du Nord sa stratégie énergétique. Pékin accélère ainsi sa coopération entamée notamment avec l’Algérie, le Ma…</div>
-      <div class="news-date">21 Apr, 17:18</div>
     </div></div><button class="btn-more" onclick="afficherPlus('courrier_international')">▼ Afficher plus (15)</button>
           </div>
         </div>
