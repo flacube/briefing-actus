@@ -82,7 +82,7 @@ def generate_ai_summary(articles_by_source):
         "generationConfig": {"temperature": 0.5, "maxOutputTokens": 300}
     }).encode("utf-8")
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key={api_key}"
 
     try:
         req = urllib.request.Request(
